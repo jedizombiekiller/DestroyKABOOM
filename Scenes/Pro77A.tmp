@@ -1,0 +1,108 @@
+[gd_scene load_steps=14 format=3 uid="uid://bbhshsky1v87x"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Protag.gd" id="1_gd56k"]
+[ext_resource type="Script" path="res://Scripts/State/StateMachine.gd" id="2_cgm52"]
+[ext_resource type="Script" path="res://Scripts/State/ProtagStates/Wander.gd" id="3_12r4f"]
+[ext_resource type="Script" path="res://Scripts/State/ProtagStates/Control.gd" id="4_4qtt2"]
+[ext_resource type="Script" path="res://Scripts/State/ProtagStates/Shooting.gd" id="5_dofun"]
+[ext_resource type="Script" path="res://Scripts/Guns/Pistol.gd" id="5_t5spg"]
+[ext_resource type="Script" path="res://Scripts/Guns/Shotgun.gd" id="6_5mroc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kw1pt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dssb"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.678431, 0, 0.101961, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1ca4h"]
+material = SubResource("StandardMaterial3D_8dssb")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_20qoe"]
+radius = 0.075
+height = 1.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_816r1"]
+points = PackedVector3Array(-2.2065, -2.29, -0.02, -2.2065, -2.29, 0.02, 0, 2.29, -0.02, 2.2065, -2.29, -0.02, 2.2065, -2.29, 0.02, 0, 2.29, 0.02)
+
+[sub_resource type="PrismMesh" id="PrismMesh_kgxr6"]
+size = Vector3(4.413, 4.58, 0.04)
+
+[node name="Protag" type="CharacterBody3D" groups=["Protag"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_gd56k")
+max_turn_accl = 500.0
+max_turn_vel = 100.0
+player_controlled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kw1pt")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_1ca4h")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_cgm52")
+initial_state = NodePath("Wander")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("protag", "next_state")]
+script = ExtResource("3_12r4f")
+protag = NodePath("../..")
+next_state = NodePath("../Shoot")
+
+[node name="Control" type="Node" parent="StateMachine" node_paths=PackedStringArray("protag")]
+script = ExtResource("4_4qtt2")
+protag = NodePath("../..")
+
+[node name="Shoot" type="Node" parent="StateMachine" node_paths=PackedStringArray("protag", "next_state")]
+script = ExtResource("5_dofun")
+protag = NodePath("../..")
+next_state = NodePath("../Wander")
+
+[node name="StrafeTimer" type="Timer" parent="StateMachine/Shoot"]
+autostart = true
+
+[node name="GunMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.173648, -0.984808, 0, 0.984808, 0.173648, 0, -0.2, -0.1)
+mesh = SubResource("CapsuleMesh_20qoe")
+
+[node name="ShotgunArea" type="Area3D" parent="."]
+monitorable = false
+script = ExtResource("6_5mroc")
+damage_range = [10, 35]
+active = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShotgunArea"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00222778, -2.38419e-07, -2.44772)
+shape = SubResource("ConvexPolygonShape3D_816r1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShotgunArea"]
+transform = Transform3D(1, 0, 0, 0, -4.37113e-08, -0.999999, 0, 0.999999, -4.37113e-08, 0, 0, -2.8)
+visible = false
+mesh = SubResource("PrismMesh_kgxr6")
+
+[node name="Timer" type="Timer" parent="ShotgunArea"]
+wait_time = 1.2
+autostart = true
+
+[node name="PistolArea" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1000)
+debug_shape_thickness = 3
+script = ExtResource("5_t5spg")
+active = false
+
+[node name="Timer" type="Timer" parent="PistolArea"]
+wait_time = 0.6
+autostart = true
+
+[node name="PointOfInterest" type="Node3D" parent="."]
+
+[node name="LookTarget" type="Node3D" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[connection signal="timeout" from="StateMachine/Shoot/StrafeTimer" to="StateMachine/Shoot" method="_on_strafe_timer_timeout"]
+[connection signal="body_entered" from="ShotgunArea" to="ShotgunArea" method="_on_body_entered"]
+[connection signal="body_exited" from="ShotgunArea" to="ShotgunArea" method="_on_body_exited"]
+[connection signal="timeout" from="ShotgunArea/Timer" to="ShotgunArea" method="_on_timer_timeout"]
+[connection signal="timeout" from="PistolArea/Timer" to="PistolArea" method="_on_timer_timeout"]

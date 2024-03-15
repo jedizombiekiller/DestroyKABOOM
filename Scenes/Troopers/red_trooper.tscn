@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://cds1duut431kl"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/red_trooper.gd" id="1_sa2pg"]
+[ext_resource type="Script" path="res://Scripts/Resources/TroopResource.gd" id="2_l878h"]
+
+[sub_resource type="Resource" id="Resource_x05g7"]
+script = ExtResource("2_l878h")
+cost = 0
+health = 50
+speed = 20.0
+melee_damage = 10
+proj_damage = 10
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xdygo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dssb"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.85098, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e3goj"]
+material = SubResource("StandardMaterial3D_8dssb")
+
+[node name="RedTrooper" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_sa2pg")
+troopResource = SubResource("Resource_x05g7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xdygo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_e3goj")

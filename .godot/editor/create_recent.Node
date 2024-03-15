@@ -1,0 +1,14 @@
+AudioStreamPlayer
+Button
+TextureRect
+AnimationPlayer
+AnimationTree
+ColorRect
+Control
+HSlider
+Label
+HBoxContainer
+VBoxContainer
+Node
+AudioStreamPlayer3D
+Node3D

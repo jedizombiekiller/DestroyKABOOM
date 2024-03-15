@@ -1,0 +1,293 @@
+[gd_scene load_steps=48 format=3 uid="uid://bbhshsky1v87x"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Protag.gd" id="1_gd56k"]
+[ext_resource type="Script" path="res://Scripts/State/StateMachine.gd" id="2_cgm52"]
+[ext_resource type="Script" path="res://Scripts/State/ProtagStates/Wander.gd" id="3_12r4f"]
+[ext_resource type="Script" path="res://Scripts/State/ProtagStates/Control.gd" id="4_4qtt2"]
+[ext_resource type="Script" path="res://Scripts/State/ProtagStates/Shooting.gd" id="5_dofun"]
+[ext_resource type="Script" path="res://Scripts/Guns/Shotgun.gd" id="6_5mroc"]
+[ext_resource type="Script" path="res://Scripts/State/ProtagStates/Passive.gd" id="6_ndld4"]
+[ext_resource type="Script" path="res://Scripts/State/ProtagStates/Fear.gd" id="7_0kmue"]
+[ext_resource type="Script" path="res://Scripts/State/ProtagStates/Die.gd" id="8_n4n5k"]
+[ext_resource type="AudioStream" uid="uid://blb7lsur0jquv" path="res://Sound/SFX/Gun/Shotgun.wav" id="9_frmj0"]
+[ext_resource type="Script" path="res://Scripts/Guns/PistolArea.gd" id="9_xrm8b"]
+[ext_resource type="Script" path="res://Scripts/Guns/ChaingunArea.gd" id="10_bt46e"]
+[ext_resource type="AudioStream" uid="uid://cuupqna8l5qr0" path="res://Sound/SFX/Gun/Pistol.wav" id="11_lq1w1"]
+[ext_resource type="AudioStream" uid="uid://druyno8u1peqb" path="res://Sound/SFX/Gun/Chaingun.wav" id="14_gqei3"]
+[ext_resource type="AudioStream" uid="uid://d06evfsx3gcif" path="res://Sound/SFX/Effects/Keyboard.wav" id="14_k4s5e"]
+[ext_resource type="Texture2D" uid="uid://c0jnd7xutm6k3" path="res://Graphics/Sprites/Kaboom/Minimap.png" id="16_xjc0d"]
+[ext_resource type="Script" path="res://Scripts/Sounds/ProtagSoundManager.gd" id="17_wk88d"]
+[ext_resource type="AudioStream" uid="uid://b3of1687pli3j" path="res://Sound/Voices/Kaboom/Hurt3.wav" id="18_swu6j"]
+[ext_resource type="AudioStream" uid="uid://bvcvgycxldmp1" path="res://Sound/Voices/Kaboom/Hurt1.wav" id="18_ucwjy"]
+[ext_resource type="AudioStream" uid="uid://dtlmhk3sbs2g2" path="res://Sound/Voices/Kaboom/Hurt2.wav" id="19_cuqk4"]
+[ext_resource type="AudioStream" uid="uid://2hw00j4qoots" path="res://Sound/Voices/Kaboom/Hurt4.wav" id="21_d8y43"]
+[ext_resource type="AudioStream" uid="uid://brb7x6uehts1n" path="res://Sound/Voices/Kaboom/KaboomTime.wav" id="22_qic4b"]
+[ext_resource type="AudioStream" uid="uid://opdk5s6dj3db" path="res://Sound/Voices/Kaboom/Wilhelm.wav" id="23_rsyx0"]
+[ext_resource type="AudioStream" uid="uid://lnfjpgqrk1oj" path="res://Sound/Voices/Kaboom/New/Death1.wav" id="24_31oxj"]
+[ext_resource type="AudioStream" uid="uid://b3t2fbk5pw6mo" path="res://Sound/Voices/Kaboom/New/Death2.wav" id="25_xcncg"]
+[ext_resource type="AudioStream" uid="uid://balmxhimgkk3s" path="res://Sound/Voices/Kaboom/New/Death3.wav" id="26_u2jtj"]
+[ext_resource type="AudioStream" uid="uid://cgyq452v3ryxe" path="res://Sound/Voices/Kaboom/New/RipAndTear.wav" id="27_5lnr7"]
+[ext_resource type="AudioStream" uid="uid://bskngsq1dhn1" path="res://Sound/Voices/Kaboom/New/BackInAction.wav" id="28_j7oya"]
+[ext_resource type="AudioStream" uid="uid://b3jrj8sxaws7o" path="res://Sound/Voices/Kaboom/New/GimmeSomeSugarbaby.wav" id="29_mabop"]
+[ext_resource type="AudioStream" uid="uid://cw4j4hoepme88" path="res://Sound/Voices/Kaboom/New/OhNo.wav" id="30_ujner"]
+[ext_resource type="AudioStream" uid="uid://k67xt6abxro6" path="res://Sound/Voices/Kaboom/New/ThisSucks.wav" id="31_snl7p"]
+[ext_resource type="AudioStream" uid="uid://bw7d3ccoumxs8" path="res://Sound/Voices/Kaboom/New/YouLookRealUgly.wav" id="32_5t7uf"]
+[ext_resource type="AudioStream" uid="uid://dx50xjyay34kg" path="res://Sound/Voices/Kaboom/New/ICanDoThisAllDay.wav" id="33_khjc2"]
+[ext_resource type="AudioStream" uid="uid://cfc4pavjjbekk" path="res://Sound/Voices/Kaboom/New/DieAlienScum.wav" id="34_mgvln"]
+[ext_resource type="AudioStream" uid="uid://bpdvwufi5ibgs" path="res://Sound/Voices/Kaboom/New/GetKaboomed1.wav" id="35_pwgu6"]
+[ext_resource type="AudioStream" uid="uid://gcgm77dcnxjl" path="res://Sound/Voices/Kaboom/New/GetKaboomed2.wav" id="36_1l75g"]
+[ext_resource type="AudioStream" uid="uid://x1itk01r51vj" path="res://Sound/Voices/Kaboom/New/Oops.wav" id="37_ytle7"]
+[ext_resource type="AudioStream" uid="uid://du88spex15q7o" path="res://Sound/Voices/Kaboom/New/Kaboom1.wav" id="38_e2334"]
+[ext_resource type="AudioStream" uid="uid://c5icd12eif0qp" path="res://Sound/Voices/Kaboom/New/Kaboom2.wav" id="39_1q8vh"]
+[ext_resource type="AudioStream" uid="uid://d4iwod6gltfow" path="res://Sound/Voices/Kaboom/New/Bingo1.wav" id="40_bumsn"]
+[ext_resource type="AudioStream" uid="uid://yvps31snhrws" path="res://Sound/Voices/Kaboom/New/Bingo2.wav" id="41_g2kjn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kw1pt"]
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dssb"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.678431, 0, 0.101961, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1ca4h"]
+material = SubResource("StandardMaterial3D_8dssb")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_20qoe"]
+radius = 0.075
+height = 1.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_816r1"]
+points = PackedVector3Array(-2.2065, -2.29, -0.02, -2.2065, -2.29, 0.02, 0, 2.29, -0.02, 2.2065, -2.29, -0.02, 2.2065, -2.29, 0.02, 0, 2.29, 0.02)
+
+[sub_resource type="PrismMesh" id="PrismMesh_kgxr6"]
+size = Vector3(4.413, 4.58, 0.04)
+
+[node name="Protag" type="CharacterBody3D" node_paths=PackedStringArray("guns") groups=["Protag"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_gd56k")
+fear_chance = 30
+max_turn_accl = 500.0
+max_turn_vel = 100.0
+player_controlled = true
+guns = [NodePath("PistolArea"), NodePath("ShotgunArea"), NodePath("ChaingunArea"), null]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+shape = SubResource("CapsuleShape3D_kw1pt")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_1ca4h")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+height = 2.0
+radius = 1.0
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_cgm52")
+initial_state = NodePath("Passive")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("protag", "next_state")]
+script = ExtResource("3_12r4f")
+protag = NodePath("../..")
+next_state = NodePath("../Shoot")
+
+[node name="Control" type="Node" parent="StateMachine" node_paths=PackedStringArray("protag")]
+script = ExtResource("4_4qtt2")
+protag = NodePath("../..")
+
+[node name="Shoot" type="Node" parent="StateMachine" node_paths=PackedStringArray("protag", "next_state")]
+script = ExtResource("5_dofun")
+update_time = 0.5
+protag = NodePath("../..")
+next_state = NodePath("../Passive")
+
+[node name="Passive" type="Node" parent="StateMachine" node_paths=PackedStringArray("protag", "next_state")]
+script = ExtResource("6_ndld4")
+protag = NodePath("../..")
+next_state = NodePath("../Shoot")
+
+[node name="Fear" type="Node" parent="StateMachine" node_paths=PackedStringArray("protag", "next_state", "next_action_state")]
+script = ExtResource("7_0kmue")
+bravery_chance = 25
+update_time = 0.5
+protag = NodePath("../..")
+next_state = NodePath("../Passive")
+next_action_state = NodePath("../Shoot")
+
+[node name="Timer" type="Timer" parent="StateMachine/Fear"]
+
+[node name="Die" type="Node" parent="StateMachine" node_paths=PackedStringArray("protag")]
+script = ExtResource("8_n4n5k")
+protag = NodePath("../..")
+
+[node name="GunMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.173648, -0.984808, 0, 0.984808, 0.173648, 0, -0.2, -0.1)
+mesh = SubResource("CapsuleMesh_20qoe")
+
+[node name="ShotgunArea" type="Area3D" parent="."]
+visible = false
+monitorable = false
+script = ExtResource("6_5mroc")
+damage_range = [10, 35]
+active = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShotgunArea"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00222778, -2.38419e-07, -2.44772)
+shape = SubResource("ConvexPolygonShape3D_816r1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShotgunArea"]
+transform = Transform3D(1, 0, 0, 0, -4.37113e-08, -0.999999, 0, 0.999999, -4.37113e-08, 0, 0, -2.8)
+visible = false
+mesh = SubResource("PrismMesh_kgxr6")
+
+[node name="Timer" type="Timer" parent="ShotgunArea"]
+wait_time = 1.2
+autostart = true
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="ShotgunArea"]
+stream = ExtResource("9_frmj0")
+volume_db = 5.0
+
+[node name="PistolArea" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.238133)
+visible = false
+target_position = Vector3(0, 0, -1000)
+collision_mask = 16
+debug_shape_thickness = 3
+script = ExtResource("9_xrm8b")
+damage_range = [8, 15]
+fire_rate = 0.35
+
+[node name="Timer" type="Timer" parent="PistolArea"]
+wait_time = 0.6
+autostart = true
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="PistolArea"]
+stream = ExtResource("11_lq1w1")
+
+[node name="ChaingunArea" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.227837)
+target_position = Vector3(0, 0, -1000)
+collision_mask = 16
+debug_shape_thickness = 3
+script = ExtResource("10_bt46e")
+damage_range = [3, 7]
+fire_rate = 0.1
+
+[node name="Timer" type="Timer" parent="ChaingunArea"]
+wait_time = 0.1
+autostart = true
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="ChaingunArea"]
+stream = ExtResource("14_gqei3")
+volume_db = -9.886
+
+[node name="PointOfInterest" type="Node3D" parent="."]
+
+[node name="LookTarget" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+omni_range = 9.0
+
+[node name="Typing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_k4s5e")
+
+[node name="MiniMapHead" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+rotation_edit_mode = 2
+layers = 524288
+pixel_size = 0.05
+billboard = 1
+double_sided = false
+texture_filter = 0
+texture = ExtResource("16_xjc0d")
+
+[node name="ProtagSoundManager" type="Node3D" parent="." node_paths=PackedStringArray("protag", "hurt_sounds", "death_sounds", "bravery_sounds", "fear_sounds", "win_sounds", "domination_sounds", "wilhelm")]
+script = ExtResource("17_wk88d")
+protag = NodePath("..")
+hurt_sounds = [NodePath("Hurt1"), NodePath("Hurt2"), NodePath("Hurt3"), NodePath("Hurt4")]
+death_sounds = [NodePath("Death1"), NodePath("Death2"), NodePath("Death3")]
+bravery_sounds = [NodePath("RipAndTear"), NodePath("BackInAction"), NodePath("GimmeSomeSugar")]
+fear_sounds = [NodePath("OhNo"), NodePath("ThisSucks"), NodePath("YouLookRealUgly")]
+win_sounds = [NodePath("Kaboom1"), NodePath("Kaboom2"), NodePath("Bingo1"), NodePath("Bingo2")]
+domination_sounds = [NodePath("ICanDoThis"), NodePath("DieAlienScum"), NodePath("GetKaboomed"), NodePath("GetKaboomed2"), NodePath("Oops")]
+wilhelm = NodePath("Wilhelm")
+
+[node name="Hurt1" type="AudioStreamPlayer3D" parent="ProtagSoundManager"]
+stream = ExtResource("18_ucwjy")
+
+[node name="Hurt2" type="AudioStreamPlayer3D" parent="ProtagSoundManager"]
+stream = ExtResource("19_cuqk4")
+
+[node name="Hurt3" type="AudioStreamPlayer3D" parent="ProtagSoundManager"]
+stream = ExtResource("18_swu6j")
+
+[node name="Hurt4" type="AudioStreamPlayer3D" parent="ProtagSoundManager"]
+stream = ExtResource("21_d8y43")
+
+[node name="KaboomTime" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("22_qic4b")
+
+[node name="Wilhelm" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Death"]]
+stream = ExtResource("23_rsyx0")
+
+[node name="Death1" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Death"]]
+stream = ExtResource("24_31oxj")
+
+[node name="Death2" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Death"]]
+stream = ExtResource("25_xcncg")
+
+[node name="Death3" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Death"]]
+stream = ExtResource("26_u2jtj")
+
+[node name="RipAndTear" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("27_5lnr7")
+
+[node name="BackInAction" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("28_j7oya")
+
+[node name="GimmeSomeSugar" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("29_mabop")
+
+[node name="OhNo" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("30_ujner")
+
+[node name="ThisSucks" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("31_snl7p")
+
+[node name="YouLookRealUgly" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("32_5t7uf")
+
+[node name="ICanDoThis" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("33_khjc2")
+
+[node name="DieAlienScum" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("34_mgvln")
+
+[node name="GetKaboomed" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("35_pwgu6")
+
+[node name="GetKaboomed2" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("36_1l75g")
+
+[node name="Oops" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("37_ytle7")
+
+[node name="Kaboom1" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("38_e2334")
+
+[node name="Kaboom2" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("39_1q8vh")
+
+[node name="Bingo1" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("40_bumsn")
+
+[node name="Bingo2" type="AudioStreamPlayer3D" parent="ProtagSoundManager" groups=["Sentence"]]
+stream = ExtResource("41_g2kjn")
+
+[connection signal="boss_defeat" from="." to="." method="_on_boss_defeat"]
+[connection signal="timeout" from="StateMachine/Fear/Timer" to="StateMachine/Fear" method="_on_timer_timeout"]
+[connection signal="body_entered" from="ShotgunArea" to="ShotgunArea" method="_on_body_entered"]
+[connection signal="body_exited" from="ShotgunArea" to="ShotgunArea" method="_on_body_exited"]
+[connection signal="timeout" from="ShotgunArea/Timer" to="ShotgunArea" method="_on_timer_timeout"]

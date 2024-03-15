@@ -1,0 +1,76 @@
+[gd_scene load_steps=15 format=3 uid="uid://bj0pekmgbivee"]
+
+[ext_resource type="Script" path="res://Scripts/Trooper/Building.gd" id="1_5wxp3"]
+[ext_resource type="ArrayMesh" uid="uid://cu365mkfqwvns" path="res://Graphics/Models/FactoryModel/Building.obj" id="2_5oqs6"]
+[ext_resource type="Script" path="res://Scripts/Resources/TroopResource.gd" id="2_ds8ep"]
+[ext_resource type="Texture2D" uid="uid://btlisimgsgsxr" path="res://Graphics/Models/FactoryModel/BUILD051.png" id="3_86jig"]
+[ext_resource type="Texture2D" uid="uid://b3gdi7yhuql5v" path="res://Graphics/Models/FactoryModel/BUILDLOGO.png" id="4_hfjsp"]
+[ext_resource type="Script" path="res://Scripts/State/StateMachine.gd" id="6_r6s5r"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Follow.gd" id="7_i460q"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Wander.gd" id="8_cjmb8"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Melee.gd" id="9_0sap6"]
+[ext_resource type="Script" path="res://Scripts/Sounds/SoundManager.gd" id="10_4per4"]
+
+[sub_resource type="Resource" id="Resource_c56iy"]
+script = ExtResource("2_ds8ep")
+health = 700
+speed = 0.0
+melee_damage = 0.0
+proj_damage = 0.0
+melee_dist = 0.0
+follow_dist = 0.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c1d5l"]
+points = PackedVector3Array(1.90859, 2, 0.999988, -1.97018, 0.000403867, -1, -1.90861, 0.0321436, 1, 1.97018, 0.000403867, -1, -1.90859, 2, -0.968242, 1.90861, 0.0321436, 1, -1.90859, 2, 0.999988, 1.90859, 2, -0.968242)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvfqn"]
+resource_name = "HallwayWall"
+cull_mode = 2
+albedo_texture = ExtResource("3_86jig")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfnup"]
+resource_name = "HallwayWall"
+cull_mode = 2
+albedo_texture = ExtResource("4_hfjsp")
+texture_filter = 2
+
+[node name="Building" type="CharacterBody3D" node_paths=PackedStringArray("sound_manager") groups=["Boss", "Trooper"]]
+collision_layer = 17
+collision_mask = 17
+slide_on_ceiling = false
+script = ExtResource("1_5wxp3")
+troopResource = SubResource("Resource_c56iy")
+sound_manager = NodePath("SoundManager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_c1d5l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+layers = 524289
+mesh = ExtResource("2_5oqs6")
+surface_material_override/0 = SubResource("StandardMaterial3D_gvfqn")
+surface_material_override/1 = SubResource("StandardMaterial3D_dfnup")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("6_r6s5r")
+
+[node name="Follow" type="Node" parent="StateMachine"]
+script = ExtResource("7_i460q")
+action_time = 1.0
+
+[node name="Wander" type="Node" parent="StateMachine"]
+script = ExtResource("8_cjmb8")
+wander_time_range = Vector2(0.25, 1)
+action_time = 1.5
+act_percent = 50
+attack_on_sight = false
+
+[node name="Melee" type="Node" parent="StateMachine"]
+script = ExtResource("9_0sap6")
+attack_time = 0.2
+
+[node name="SoundManager" type="Node3D" parent="."]
+script = ExtResource("10_4per4")

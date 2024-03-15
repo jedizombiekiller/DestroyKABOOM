@@ -1,0 +1,22 @@
+# Blender 4.0.2 MTL File: 'Building.blend'
+# www.blender.org
+
+newmtl building
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:/Users/jediz/Documents/Game Assets/ReverseDoom/Textures/BUILD051.png
+
+newmtl buildinglogo
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:/Users/jediz/Documents/Game Assets/ReverseDoom/Textures/BUILDLOGO.png

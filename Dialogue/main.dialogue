@@ -1,0 +1,24 @@
+~ progress1
+#wait for 2 seconds before progressing
+SHRUBBON: Gah! Who is this?! And why is he so hostile?
+	Is he hacking into our doors? He's trying to get to us![next=2]
+SHRUBBON: We need to stop him. I'll spawn in our troopers. We've got plenty of workers! He doesn't stand a chance.[next=2]
+=> END
+
+~ progress2
+SHRUBBON: He made it to the office? This is unbelievable! There's only one of him![next=2]
+SHRUBBON: ...Well... We are just factory workers. We weren't made for fighting.[next=2]
+SHRUBBON: We should still fight! Our lives are at stake! And the fate of the company![next=2]
+=> END
+
+~ progress3
+SHRUBBON: Isn't this the only room between him and us? I wasn't prepared for this![next=2]
+SHRUBBON: I'm just the secretary of this company! This situation is very aberrant for me![next=2]
+SHRUBBON: Come on! We can do this! We just need to hurt him a bit more![next=2]
+=> END
+
+~ progress4
+SHRUBBON: I knew travelling to other planets was a horrible marketing campaign.[next=2]
+SHRUBBON: Evacuate the factory. I'll try to deal with him. The fate of this company rests on my hands.[next=2]
+SHRUBBON: Cerveza Especial will live on to make organisms across the galaxy happy![next=2]
+=> END

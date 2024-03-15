@@ -1,0 +1,331 @@
+[gd_scene load_steps=20 format=3 uid="uid://dif2vkcodfxdv"]
+
+[ext_resource type="Script" path="res://Scripts/UI/MainMenu.gd" id="1_5ukoa"]
+[ext_resource type="Texture2D" uid="uid://pf3hmeekyqe0" path="res://Graphics/UI/Logo.png" id="3_33igx"]
+[ext_resource type="Texture2D" uid="uid://chomq3uvfpiu8" path="res://Graphics/UI/Textures/BACKDROP.png" id="3_gp57y"]
+[ext_resource type="Texture2D" uid="uid://dyn2y5l4hdfib" path="res://Graphics/UI/LogoFull.png" id="4_0je3u"]
+[ext_resource type="Theme" uid="uid://c5nqjcb4k4anx" path="res://Graphics/UI/Themes/Buttons.tres" id="4_dxkr5"]
+[ext_resource type="Texture2D" uid="uid://brvap2q2fpqpp" path="res://Graphics/UI/Textures/9patch.png" id="7_86lps"]
+[ext_resource type="FontFile" uid="uid://8ct8mksuxvhn" path="res://Graphics/Fonts/Happy School.otf" id="8_1mfl1"]
+[ext_resource type="Script" path="res://Scripts/UI/ScreenFade.gd" id="9_mtu38"]
+[ext_resource type="AudioStream" uid="uid://bx3hsh7jdv8u1" path="res://Sound/Music/fun_is_infinite_at_agm.wav" id="10_0shj6"]
+[ext_resource type="AudioStream" uid="uid://b2ohg7gk15rhu" path="res://Sound/SFX/UI/Click1.wav" id="10_qn3gb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_61og5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ta2xi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gmqi8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5iymc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_au7x4"]
+
+[sub_resource type="Animation" id="Animation_pq3ae"]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g8c20"]
+resource_name = "FadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q3gkc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5ydh"]
+_data = {
+"FadeIn": SubResource("Animation_pq3ae"),
+"FadeOut": SubResource("Animation_g8c20"),
+"RESET": SubResource("Animation_q3gkc")
+}
+
+[node name="MainMenu" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5ukoa")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.262745, 0.215686, 0.270588, 1)
+z_as_relative = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_gp57y")
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = 17.0
+offset_right = 27.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme = ExtResource("4_dxkr5")
+metadata/_edit_group_ = true
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "PLAY"
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "CREDITS"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+texture = ExtResource("3_33igx")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -248.0
+offset_top = -7.0
+offset_right = 304.0
+offset_bottom = 330.0
+grow_horizontal = 2
+texture = ExtResource("4_0je3u")
+expand_mode = 1
+
+[node name="Credits" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 263.0
+offset_top = 145.0
+offset_right = 911.0
+offset_bottom = 567.0
+texture = ExtResource("7_86lps")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Label" type="Label" parent="Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_1mfl1")
+theme_override_font_sizes/font_size = 25
+text = "Music by northivanastan
+Shotgun model by Vinrax (vinrax@gmail.com)
+SFX from Pixabay & Freesound
+Dialogue Manager by Nathan Hoad
+
+VFX from OpenGameArt.org
+Pretty much everything else by Jedizombiekiller"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -165.0
+offset_top = 222.0
+offset_right = 172.0
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.168627, 0.333333, 0.45098, 1)
+theme_override_fonts/font = ExtResource("8_1mfl1")
+theme_override_font_sizes/font_size = 15
+text = "https://github.com/nathanhoad/godot_dialogue_manager/blob/main/LICENSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="X" type="Button" parent="Credits"]
+layout_mode = 0
+offset_right = 71.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0.635294, 0, 0.196078, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_61og5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ta2xi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gmqi8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5iymc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_au7x4")
+text = "x"
+
+[node name="SettingsMenu" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 26.0
+offset_right = 911.0
+offset_bottom = 636.0
+theme = ExtResource("4_dxkr5")
+texture = ExtResource("7_86lps")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SettingsX" type="Button" parent="SettingsMenu"]
+layout_mode = 0
+offset_right = 71.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0.635294, 0, 0.196078, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_61og5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ta2xi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gmqi8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5iymc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_au7x4")
+text = "x"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 59.0
+offset_top = 23.0
+offset_right = -38.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="DialogueOption" type="HBoxContainer" parent="SettingsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsMenu/VBoxContainer/DialogueOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_1mfl1")
+theme_override_font_sizes/font_size = 35
+text = "DIALOGUE"
+
+[node name="Button" type="Button" parent="SettingsMenu/VBoxContainer/DialogueOption"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+text = "ON"
+
+[node name="VolumeOption" type="HBoxContainer" parent="SettingsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsMenu/VBoxContainer/VolumeOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_1mfl1")
+theme_override_font_sizes/font_size = 35
+text = "VOLUME"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsMenu/VBoxContainer/VolumeOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -30.0
+max_value = 0.0
+value = -15.0
+
+[node name="ScreenFade" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+script = ExtResource("9_mtu38")
+opening_animation = "Fade In Black"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenFade"]
+libraries = {
+"": SubResource("AnimationLibrary_v5ydh")
+}
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_0shj6")
+volume_db = -5.684
+autoplay = true
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_qn3gb")
+
+[connection signal="button_down" from="VBoxContainer/PlayButton" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_button_down"]
+[connection signal="button_down" from="Credits/X" to="." method="_on_x_button_down"]
+[connection signal="button_down" from="SettingsMenu/SettingsX" to="." method="_on_settings_x_button_down"]
+[connection signal="toggled" from="SettingsMenu/VBoxContainer/DialogueOption/Button" to="." method="_on_button_toggled"]
+[connection signal="value_changed" from="SettingsMenu/VBoxContainer/VolumeOption/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

@@ -1,0 +1,159 @@
+[gd_scene load_steps=26 format=3 uid="uid://bbaceunh5usgs"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Trooper.gd" id="1_1ysx4"]
+[ext_resource type="Script" path="res://Scripts/Resources/TroopResource.gd" id="2_bqg2w"]
+[ext_resource type="PackedScene" uid="uid://dgdlupjuomx6k" path="res://Scenes/Items/Beer.tscn" id="3_2350c"]
+[ext_resource type="Script" path="res://Scripts/State/StateMachine.gd" id="3_n8kmu"]
+[ext_resource type="PackedScene" uid="uid://jur1usq04sek" path="res://Scenes/Items/BeerPack.tscn" id="3_sxskq"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Wander.gd" id="4_c70gf"]
+[ext_resource type="PackedScene" uid="uid://cc8lbidq0tt6v" path="res://Scenes/Items/Mag.tscn" id="5_01owx"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Follow.gd" id="5_6vqmc"]
+[ext_resource type="PackedScene" uid="uid://bi4pogi6i6d0s" path="res://Scenes/Items/Shell.tscn" id="6_36f0u"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Melee.gd" id="6_73qka"]
+[ext_resource type="PackedScene" uid="uid://dtt2q08h6wg60" path="res://Scenes/Classes/sprite_3d.tscn" id="11_v7qbt"]
+[ext_resource type="Texture2D" uid="uid://d0nqod7q0s60f" path="res://Graphics/Sprites/Placeholder/ImpSprites.png" id="12_di3wu"]
+[ext_resource type="Texture2D" uid="uid://d3iwfj05r600w" path="res://Graphics/Sprites/Placeholder/ImpHead.png" id="12_q205d"]
+[ext_resource type="Script" path="res://Scripts/Sounds/SoundManager.gd" id="14_qhrom"]
+[ext_resource type="AudioStream" uid="uid://cxfq6avlnft56" path="res://Sound/SFX/Placeholder/ImpSeen.wav" id="15_m41vg"]
+[ext_resource type="AudioStream" uid="uid://d2wwhtmw7ywv6" path="res://Sound/SFX/Placeholder/ImpPain.wav" id="16_ar5tf"]
+[ext_resource type="AudioStream" uid="uid://cll7k86nrln72" path="res://Sound/SFX/Placeholder/ImpDeath.wav" id="17_pwqp2"]
+[ext_resource type="AudioStream" uid="uid://b2mm1ghra3lmi" path="res://Sound/SFX/Placeholder/ImpDeath2.wav" id="18_y2cnl"]
+
+[sub_resource type="Resource" id="Resource_mf5h7"]
+script = ExtResource("2_bqg2w")
+health = 50
+speed = 10.0
+melee_damage = 10.0
+proj_damage = 10.0
+melee_dist = 4.0
+follow_dist = 3.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xdygo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dssb"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.85098, 0.784314, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e3goj"]
+material = SubResource("StandardMaterial3D_8dssb")
+
+[sub_resource type="Animation" id="Animation_hf36x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:anim_col")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ck5mr"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:anim_col")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jj7qn"]
+_data = {
+"RESET": SubResource("Animation_hf36x"),
+"Walk": SubResource("Animation_ck5mr")
+}
+
+[node name="Trooper" type="CharacterBody3D" node_paths=PackedStringArray("sound_manager") groups=["Trooper"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_mask = 17
+script = ExtResource("1_1ysx4")
+troopResource = SubResource("Resource_mf5h7")
+loot = Array[PackedScene]([ExtResource("3_sxskq"), ExtResource("3_2350c"), ExtResource("5_01owx"), ExtResource("6_36f0u")])
+sound_manager = NodePath("SoundManager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xdygo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_e3goj")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_n8kmu")
+initial_state = NodePath("Wander")
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop", "next_state_close")]
+script = ExtResource("5_6vqmc")
+troop = NodePath("../..")
+next_state_close = NodePath("../Melee")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop", "next_state_close", "next_state")]
+script = ExtResource("4_c70gf")
+act_percent = 10
+attack_on_sight = false
+troop = NodePath("../..")
+next_state_close = NodePath("../Melee")
+next_state = NodePath("../Follow")
+
+[node name="Melee" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop", "next_state")]
+script = ExtResource("6_73qka")
+attack_time = 1.0
+troop = NodePath("../..")
+next_state = NodePath("../Wander")
+
+[node name="Sprite3D" parent="." instance=ExtResource("11_v7qbt")]
+texture = ExtResource("12_di3wu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite3D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_jj7qn")
+}
+autoplay = "Walk"
+
+[node name="MiniMapHead" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+rotation_edit_mode = 2
+layers = 524288
+pixel_size = 0.16
+billboard = 1
+double_sided = false
+texture_filter = 0
+texture = ExtResource("12_q205d")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="SoundManager" type="Node3D" parent="." node_paths=PackedStringArray("idle_sounds", "hurt_sounds")]
+script = ExtResource("14_qhrom")
+idle_sounds = [NodePath("FollowVoice")]
+hurt_sounds = [NodePath("PainVoice")]
+
+[node name="FollowVoice" type="AudioStreamPlayer3D" parent="SoundManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("15_m41vg")
+
+[node name="PainVoice" type="AudioStreamPlayer3D" parent="SoundManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("16_ar5tf")
+
+[node name="Death1" type="AudioStreamPlayer3D" parent="SoundManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("17_pwqp2")
+
+[node name="Death2" type="AudioStreamPlayer3D" parent="SoundManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("18_y2cnl")

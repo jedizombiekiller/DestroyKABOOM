@@ -1,0 +1,85 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_b6upc"]
+
+[resource]
+script = ExtResource("1_b6upc")
+using_states = PackedStringArray()
+titles = {
+"intro": "3"
+}
+character_names = PackedStringArray("N")
+first_title = "3"
+lines = {
+"1": {
+"id": "1",
+"next_id": "3",
+"text": "intro",
+"type": "title"
+},
+"3": {
+"character": "N",
+"character_replacements": Array[Dictionary]([]),
+"id": "3",
+"next_id": "5",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "March 7th, 2112: [wait=0.5]
+A UFO has landed behind the White House housing aliens who hold a strange liquid and shout \"COME GET SOME!\"[next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "March 7th, 2112: [wait=0.5]
+A UFO has landed behind the White House housing aliens who hold a strange liquid and shout \"COME GET SOME!\"[next=2]",
+"type": "dialogue"
+},
+"5": {
+"character": "N",
+"character_replacements": Array[Dictionary]([]),
+"id": "5",
+"next_id": "6",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "People nearby cower in fear, but not Colonel Kaboom! He grabs his guns and and eliminates the aliens.[next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "People nearby cower in fear, but not Colonel Kaboom! He grabs his guns and and eliminates the aliens.[next=2]",
+"type": "dialogue"
+},
+"6": {
+"character": "N",
+"character_replacements": Array[Dictionary]([]),
+"id": "6",
+"next_id": "7",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "With their ship left open, he hops on the UFO on course to Venus to destroy the aliens at their roots.[next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "With their ship left open, he hops on the UFO on course to Venus to destroy the aliens at their roots.[next=2]",
+"type": "dialogue"
+},
+"7": {
+"character": "N",
+"character_replacements": Array[Dictionary]([]),
+"id": "7",
+"next_id": "8",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "\"It's Kaboom Time!\"[next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"It's Kaboom Time!\"[next=2]",
+"type": "dialogue"
+},
+"8": {
+"id": "8",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+}
+}
+raw_text = "~ intro
+
+N: March 7th, 2112\\: [wait=0.5]
+	A UFO has landed behind the White House housing aliens who hold a strange liquid and shout \"COME GET SOME!\"[next=2]
+N: People nearby cower in fear, but not Colonel Kaboom! He grabs his guns and and eliminates the aliens.[next=2]
+N: With their ship left open, he hops on the UFO on course to Venus to destroy the aliens at their roots.[next=2]
+N: \"It's Kaboom Time!\"[next=2]
+=> END"
+metadata/dialogue_manager_version = "2.36.0"

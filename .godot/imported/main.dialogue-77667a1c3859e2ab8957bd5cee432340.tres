@@ -1,0 +1,224 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_botd5"]
+
+[resource]
+script = ExtResource("1_botd5")
+using_states = PackedStringArray()
+titles = {
+"progress1": "3",
+"progress2": "9",
+"progress3": "15",
+"progress4": "21"
+}
+character_names = PackedStringArray("SHRUBBON")
+first_title = "3"
+lines = {
+"1": {
+"id": "1",
+"next_id": "3",
+"text": "progress1",
+"type": "title"
+},
+"10": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "10",
+"next_id": "11",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "...Well... We are just factory workers. We weren't made for fighting.[next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "...Well... We are just factory workers. We weren't made for fighting.[next=2]",
+"type": "dialogue"
+},
+"11": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "11",
+"next_id": "12",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "We should still fight! Our lives are at stake! And the fate of the company![next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "We should still fight! Our lives are at stake! And the fate of the company![next=2]",
+"type": "dialogue"
+},
+"12": {
+"id": "12",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"14": {
+"id": "14",
+"next_id": "15",
+"text": "progress3",
+"type": "title"
+},
+"15": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "15",
+"next_id": "16",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Isn't this the only room between him and us? I wasn't prepared for this![next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Isn't this the only room between him and us? I wasn't prepared for this![next=2]",
+"type": "dialogue"
+},
+"16": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "16",
+"next_id": "17",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "I'm just the secretary of this company! This situation is very aberrant for me![next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "I'm just the secretary of this company! This situation is very aberrant for me![next=2]",
+"type": "dialogue"
+},
+"17": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "17",
+"next_id": "18",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Come on! We can do this! We just need to hurt him a bit more![next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Come on! We can do this! We just need to hurt him a bit more![next=2]",
+"type": "dialogue"
+},
+"18": {
+"id": "18",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"20": {
+"id": "20",
+"next_id": "21",
+"text": "progress4",
+"type": "title"
+},
+"21": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "21",
+"next_id": "22",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "I knew travelling to other planets was a horrible marketing campaign.[next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "I knew travelling to other planets was a horrible marketing campaign.[next=2]",
+"type": "dialogue"
+},
+"22": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "22",
+"next_id": "23",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Evacuate the factory. I'll try to deal with him. The fate of this company rests on my hands.[next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Evacuate the factory. I'll try to deal with him. The fate of this company rests on my hands.[next=2]",
+"type": "dialogue"
+},
+"23": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "23",
+"next_id": "24",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Cerveza Especial will live on to make organisms across the galaxy happy![next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Cerveza Especial will live on to make organisms across the galaxy happy![next=2]",
+"type": "dialogue"
+},
+"24": {
+"id": "24",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"3": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "3",
+"next_id": "5",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Gah! Who is this?! And why is he so hostile?
+Is he hacking into our doors? He's trying to get to us![next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Gah! Who is this?! And why is he so hostile?
+Is he hacking into our doors? He's trying to get to us![next=2]",
+"type": "dialogue"
+},
+"5": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "5",
+"next_id": "6",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "We need to stop him. I'll spawn in our troopers. We've got plenty of workers! He doesn't stand a chance.[next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "We need to stop him. I'll spawn in our troopers. We've got plenty of workers! He doesn't stand a chance.[next=2]",
+"type": "dialogue"
+},
+"6": {
+"id": "6",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"8": {
+"id": "8",
+"next_id": "9",
+"text": "progress2",
+"type": "title"
+},
+"9": {
+"character": "SHRUBBON",
+"character_replacements": Array[Dictionary]([]),
+"id": "9",
+"next_id": "10",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "He made it to the office? This is unbelievable! There's only one of him![next=2]",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "He made it to the office? This is unbelievable! There's only one of him![next=2]",
+"type": "dialogue"
+}
+}
+raw_text = "~ progress1
+#wait for 2 seconds before progressing
+SHRUBBON: Gah! Who is this?! And why is he so hostile?
+	Is he hacking into our doors? He's trying to get to us![next=2]
+SHRUBBON: We need to stop him. I'll spawn in our troopers. We've got plenty of workers! He doesn't stand a chance.[next=2]
+=> END
+
+~ progress2
+SHRUBBON: He made it to the office? This is unbelievable! There's only one of him![next=2]
+SHRUBBON: ...Well... We are just factory workers. We weren't made for fighting.[next=2]
+SHRUBBON: We should still fight! Our lives are at stake! And the fate of the company![next=2]
+=> END
+
+~ progress3
+SHRUBBON: Isn't this the only room between him and us? I wasn't prepared for this![next=2]
+SHRUBBON: I'm just the secretary of this company! This situation is very aberrant for me![next=2]
+SHRUBBON: Come on! We can do this! We just need to hurt him a bit more![next=2]
+=> END
+
+~ progress4
+SHRUBBON: I knew travelling to other planets was a horrible marketing campaign.[next=2]
+SHRUBBON: Evacuate the factory. I'll try to deal with him. The fate of this company rests on my hands.[next=2]
+SHRUBBON: Cerveza Especial will live on to make organisms across the galaxy happy![next=2]
+=> END"
+metadata/dialogue_manager_version = "2.36.0"

@@ -1,0 +1,274 @@
+[gd_scene load_steps=19 format=3 uid="uid://dow1uwh2xvvus"]
+
+[ext_resource type="Script" path="res://Scripts/GameManagement/GameScene.gd" id="1_mm433"]
+[ext_resource type="PackedScene" uid="uid://cukovnwx0kyij" path="res://Scenes/Computer/computer.tscn" id="2_i7nyc"]
+[ext_resource type="PackedScene" uid="uid://b3h6abkn7m3vv" path="res://Graphics/Models/Map/Mesh/entire_map.tscn" id="2_if7tl"]
+[ext_resource type="PackedScene" uid="uid://v6etysutahot" path="res://Graphics/Models/Map/Mesh/minimap.tscn" id="3_ho3do"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/Spawner.gd" id="3_sihyi"]
+[ext_resource type="PackedScene" uid="uid://bbhshsky1v87x" path="res://Scenes/Protag.tscn" id="4_vng4s"]
+[ext_resource type="Script" path="res://Scripts/UI/Money.gd" id="5_fhcuu"]
+[ext_resource type="Script" path="res://Scripts/UI/ProgressBar.gd" id="6_cwast"]
+[ext_resource type="AudioStream" uid="uid://c17aswqqqk364" path="res://Music/02. At Doom's Gate.wav" id="7_mle63"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/ProtagCamera.gd" id="8_h42fx"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/MiniMapCamera.gd" id="10_2h3ma"]
+[ext_resource type="Texture2D" uid="uid://cdnsbphpj0t8k" path="res://Graphics/Textures/skybox.png" id="10_dugfo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tya0h"]
+size = Vector3(29, 0.3, 44)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_sxsvk"]
+vertices = PackedVector3Array(5.33579, 0.297325, -62.6642, 6.58579, 0.297325, -62.6642, 6.58579, 0.297325, -64.4142, 5.33579, 0.297325, -64.4142, 7.58579, 0.297325, -65.4142, 50.5858, 0.297325, -65.4142, 50.5858, 0.297325, -90.6642, 1.33579, 0.297325, -90.6642, 4.83579, 0.297325, -65.1642, 5.33579, 0.297325, -64.4142, 6.58579, 0.297325, -64.4142, 7.58579, 0.297325, -65.4142, 1.33579, 0.297325, -65.4142, 4.83579, 0.297325, -65.1642, 7.58579, 0.297325, -65.4142, 1.33579, 0.297325, -90.6642, 6.58579, 0.297325, -59.6642, 6.58579, 0.297325, -62.6642, 5.33579, 0.297325, -62.6642, 5.33579, 0.297325, -59.6642, 28.8358, 0.297325, -49.1642, 28.8358, 0.297325, -58.6642, 7.58579, 0.297325, -58.6642, 1.33579, 0.297325, -49.4142, 6.58579, 0.297325, -59.6642, 5.33579, 0.297325, -59.6642, 4.83579, 0.297325, -58.9142, 7.58579, 0.297325, -58.6642, 7.58579, 0.297325, -58.6642, 4.83579, 0.297325, -58.9142, 1.33579, 0.297325, -58.6642, 1.33579, 0.297325, -49.4142, 28.8358, 0.297325, -58.6642, 28.8358, 0.297325, -49.1642, 32.0858, 0.297325, -45.1642, 42.5858, 0.297325, -54.9142, 42.3358, 0.297325, -58.6642, 46.3358, 1.29733, -57.9142, 44.8358, 1.29733, -57.4142, 44.8358, 1.29733, -56.4142, 48.5858, 1.29733, -56.4142, 48.5858, 1.29733, -57.6642, 45.0858, 0.297325, -32.9142, 45.3358, 0.297325, -29.4142, 46.5858, 0.297325, -29.4142, 46.8358, 0.297325, -32.9142, 48.0858, 0.297325, -53.6642, 32.0858, 0.297325, -45.1642, 47.5858, 0.297325, -33.4142, 50.5858, 0.297325, -33.4142, 50.5858, 0.297325, -54.4142, 44.3358, 0.297325, -33.4142, 45.0858, 0.297325, -32.9142, 46.8358, 0.297325, -32.9142, 47.5858, 0.297325, -33.4142, 32.0858, 0.297325, -45.1642, 48.0858, 0.297325, -53.6642, 45.5858, 0.297325, -53.6642, 32.0858, 0.297325, -45.1642, 43.3358, 0.297325, -54.1642, 42.5858, 0.297325, -54.9142, 32.0858, 0.297325, -45.1642, 45.5858, 0.297325, -53.6642, 43.3358, 0.297325, -54.1642, 32.0858, 0.297325, -45.1642, 32.0858, 0.297325, -45.1642, 40.5858, 0.297325, -33.4142, 44.3358, 0.297325, -33.4142, 26.8358, 0.297325, -32.4142, 26.8358, 0.297325, -31.6642, 28.3358, 0.297325, -31.6642, 28.3358, 0.297325, -32.4142, 50.5858, 0.297325, -26.6642, 47.0858, 0.297325, -26.9142, 44.3358, 0.297325, -26.6642, 40.5858, 0.297325, -1.41422, 50.5858, 0.297325, 8.58578, 29.3358, 0.297325, -33.4142, 28.3358, 0.297325, -32.4142, 28.3358, 0.297325, -31.6642, 29.3358, 0.297325, -30.6642, 46.5858, 0.297325, -27.6642, 46.5858, 0.297325, -29.4142, 45.3358, 0.297325, -29.4142, 45.3358, 0.297325, -27.6642, 40.5858, 0.297325, -1.41422, 44.3358, 0.297325, -26.6642, 39.0858, 0.297325, -26.9142, 47.0858, 0.297325, -26.9142, 46.5858, 0.297325, -27.6642, 45.3358, 0.297325, -27.6642, 44.3358, 0.297325, -26.6642, 39.0858, 0.297325, -26.9142, 29.5858, 0.297325, -39.6642, 29.3358, 0.297325, -30.6642, 29.3358, 0.297325, -1.41422, 40.5858, 0.297325, -1.41422, 29.5858, 0.297325, -39.6642, 29.3358, 0.297325, -33.4142, 29.3358, 0.297325, -30.6642, 11.8358, 0.297325, -32.9142, 11.0858, 0.297325, -34.6642, 1.33579, 0.297325, -34.6642, 12.5858, 0.297325, -32.4142, 11.8358, 0.297325, -32.9142, 1.33579, 0.297325, -34.6642, 13.5858, 0.297325, -29.4142, 13.5858, 0.297325, -30.6642, 14.5858, 0.297325, -31.6642, 26.8358, 0.297325, -31.6642, 26.8358, 0.297325, -32.4142, 12.5858, 0.297325, -32.4142, 22.5858, 0.297325, -1.41422, 22.5858, 0.297325, -26.6642, 15.5858, 0.297325, -26.6642, 13.5858, 0.297325, -30.6642, 14.5858, 0.297325, -31.6642, 12.5858, 0.297325, -32.4142, 14.5858, 0.297325, -27.4142, 13.5858, 0.297325, -29.4142, 1.33579, 0.297325, -34.6642, 15.5858, 0.297325, -26.6642, 14.5858, 0.297325, -27.4142, 1.33579, 0.297325, -34.6642, 1.33579, 0.297325, -1.41422, 22.5858, 0.297325, -1.41422)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(29, 28, 30), PackedInt32Array(30, 28, 31), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(35, 32, 36), PackedInt32Array(38, 37, 39), PackedInt32Array(39, 37, 41), PackedInt32Array(39, 41, 40), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 45), PackedInt32Array(46, 50, 47), PackedInt32Array(47, 50, 48), PackedInt32Array(48, 50, 49), PackedInt32Array(52, 51, 53), PackedInt32Array(53, 51, 54), PackedInt32Array(54, 51, 55), PackedInt32Array(58, 57, 56), PackedInt32Array(61, 60, 59), PackedInt32Array(64, 63, 62), PackedInt32Array(67, 66, 65), PackedInt32Array(71, 70, 68), PackedInt32Array(68, 70, 69), PackedInt32Array(73, 72, 74), PackedInt32Array(74, 72, 75), PackedInt32Array(75, 72, 76), PackedInt32Array(78, 77, 79), PackedInt32Array(79, 77, 80), PackedInt32Array(84, 83, 81), PackedInt32Array(81, 83, 82), PackedInt32Array(87, 86, 85), PackedInt32Array(89, 88, 90), PackedInt32Array(90, 88, 91), PackedInt32Array(93, 92, 94), PackedInt32Array(94, 92, 95), PackedInt32Array(95, 92, 96), PackedInt32Array(99, 98, 97), PackedInt32Array(102, 101, 100), PackedInt32Array(103, 107, 104), PackedInt32Array(104, 107, 106), PackedInt32Array(104, 106, 105), PackedInt32Array(109, 108, 110), PackedInt32Array(110, 108, 111), PackedInt32Array(114, 113, 112), PackedInt32Array(115, 117, 116), PackedInt32Array(119, 118, 120), PackedInt32Array(122, 121, 123), PackedInt32Array(123, 121, 124), PackedInt32Array(124, 121, 125)]
+agent_radius = 1.2
+
+[sub_resource type="Environment" id="Environment_86k17"]
+background_mode = 1
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_u6efr"]
+panorama = ExtResource("10_dugfo")
+
+[sub_resource type="Sky" id="Sky_wabv7"]
+sky_material = SubResource("PanoramaSkyMaterial_u6efr")
+
+[sub_resource type="Environment" id="Environment_6jjym"]
+background_mode = 2
+sky = SubResource("Sky_wabv7")
+ambient_light_source = 2
+ambient_light_color = Color(0.466667, 0.466667, 0.466667, 1)
+reflected_light_source = 1
+
+[node name="GameScene" type="Node3D" node_paths=PackedStringArray("current_computer", "go_here", "minimap", "protag")]
+script = ExtResource("1_mm433")
+starting_energy = 50
+current_computer = NodePath("Computer1")
+go_here = NodePath("GoHere")
+minimap = NodePath("UI/TopHalf/Right/MiniMap/SubViewport2/MiniMap")
+protag = NodePath("Protag")
+
+[node name="EntireMap" parent="." instance=ExtResource("2_if7tl")]
+
+[node name="Minimap" parent="EntireMap" node_paths=PackedStringArray("main_scene") instance=ExtResource("3_ho3do")]
+main_scene = NodePath("../..")
+
+[node name="Computer1" parent="." node_paths=PackedStringArray("next_computer") instance=ExtResource("2_i7nyc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17.2275, 0.889537, -26.7061)
+active = true
+next_computer = NodePath("../Computer2")
+
+[node name="Computer2" parent="." node_paths=PackedStringArray("next_computer") instance=ExtResource("2_i7nyc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 41.9, 0.6, -26.4)
+next_computer = NodePath("../Computer3")
+
+[node name="Computer3" parent="." instance=ExtResource("2_i7nyc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 41.9, 0.6, -58.7)
+
+[node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.149999, -11)
+script = ExtResource("3_sihyi")
+
+[node name="Box" type="CSGBox3D" parent="Spawner"]
+size = Vector3(1, 0.1, 1)
+
+[node name="EnergyTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Protag" parent="." instance=ExtResource("4_vng4s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.61064, 1.2, -1.8632)
+player_controlled = false
+
+[node name="ValidTP" type="Area3D" parent="."]
+visible = false
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ValidTP"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0.5)
+shape = SubResource("BoxShape3D_tya0h")
+disabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_sxsvk")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_mle63")
+autoplay = true
+
+[node name="UI" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopHalf" type="HBoxContainer" parent="UI"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Left" type="VBoxContainer" parent="UI/TopHalf"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/TopHalf/Left"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.2
+text = "10000"
+horizontal_alignment = 1
+
+[node name="Shop" type="GridContainer" parent="UI/TopHalf/Left"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="TrapperButton" type="Button" parent="UI/TopHalf/Left/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Spawn Trapper"
+
+[node name="ShrubButton" type="Button" parent="UI/TopHalf/Left/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Spawn Shrub"
+
+[node name="PotbellyButton" type="Button" parent="UI/TopHalf/Left/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Spawn Potbelly"
+
+[node name="MageshroomButton" type="Button" parent="UI/TopHalf/Left/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Spawn Mageshroom"
+
+[node name="Right" type="VBoxContainer" parent="UI/TopHalf"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/TopHalf/Right"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="SelectTrapper" type="Button" parent="UI/TopHalf/Right/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectShrub" type="Button" parent="UI/TopHalf/Right/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectPotbelly" type="Button" parent="UI/TopHalf/Right/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectMageshroom" type="Button" parent="UI/TopHalf/Right/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MiniMap" type="SubViewportContainer" parent="UI/TopHalf/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport2" type="SubViewport" parent="UI/TopHalf/Right/MiniMap"]
+handle_input_locally = false
+size = Vector2i(574, 265)
+render_target_update_mode = 4
+
+[node name="MiniMap" type="Camera3D" parent="UI/TopHalf/Right/MiniMap/SubViewport2" node_paths=PackedStringArray("main_scene")]
+transform = Transform3D(1, 2.13163e-14, 9.31765e-22, 0, -4.37114e-08, 1, 2.13163e-14, -1, -4.37114e-08, 27, 47, -78)
+cull_mask = 524288
+environment = SubResource("Environment_86k17")
+projection = 1
+current = true
+size = 39.0
+script = ExtResource("10_2h3ma")
+main_scene = NodePath("../../../../../..")
+positions = Array[Vector3]([Vector3(12, 47, -17), Vector3(39, 47, -15), Vector3(27, 47, -48), Vector3(27, 47, -78)])
+rotations = Array[Vector3]([Vector3(-90, -90, 0), Vector3(-90, -90, 0), Vector3(-90, 0, 0), Vector3(-90, 0, 0)])
+
+[node name="BottomHalf" type="VBoxContainer" parent="UI"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProtagView" type="SubViewportContainer" parent="UI/BottomHalf"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/BottomHalf/ProtagView"]
+handle_input_locally = false
+size = Vector2i(1152, 322)
+render_target_update_mode = 4
+
+[node name="ProtagCamera" type="Camera3D" parent="UI/BottomHalf/ProtagView/SubViewport"]
+cull_mask = 524287
+current = true
+script = ExtResource("8_h42fx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI/BottomHalf/ProtagView"]
+
+[node name="Money" type="Label" parent="UI/BottomHalf/ProtagView/CanvasLayer"]
+offset_left = 14.0
+offset_top = -6.0
+offset_right = 63.0
+offset_bottom = 23.0
+scale = Vector2(3.025, 3.025)
+text = "1000"
+script = ExtResource("5_fhcuu")
+
+[node name="Health" type="Label" parent="UI/BottomHalf/ProtagView/CanvasLayer" node_paths=PackedStringArray("protag")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_right = -211.0
+offset_bottom = 29.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(3.025, 3.025)
+size_flags_horizontal = 8
+text = "1000"
+horizontal_alignment = 2
+script = ExtResource("5_fhcuu")
+protag = NodePath("../../../../../Protag")
+type = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/BottomHalf/ProtagView/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.0
+offset_top = 1.0
+offset_right = 234.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_cwast")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6jjym")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 17, 0)
+
+[node name="GoHere" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.4, -68)
+
+[connection signal="computer_action" from="Computer1" to="EntireMap" method="_on_computer_1_computer_action"]
+[connection signal="computer_action" from="Computer2" to="EntireMap" method="_on_computer_2_computer_action"]
+[connection signal="computer_action" from="Computer3" to="EntireMap" method="_on_computer_3_computer_action"]
+[connection signal="timeout" from="EnergyTimer" to="." method="_on_energy_timer_timeout"]
+[connection signal="area_entered" from="ValidTP" to="." method="_on_valid_tp_request"]

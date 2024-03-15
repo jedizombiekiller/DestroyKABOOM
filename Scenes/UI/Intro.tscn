@@ -1,0 +1,136 @@
+[gd_scene load_steps=15 format=3 uid="uid://vpuyw2v78aa5"]
+
+[ext_resource type="Script" path="res://Scripts/UI/IntroScene.gd" id="1_yk18l"]
+[ext_resource type="Resource" uid="uid://dngm38sy7i3ni" path="res://Dialogue/Intro/intro_script.dialogue" id="2_l6rh2"]
+[ext_resource type="Texture2D" uid="uid://cjilq0iiyu3mo" path="res://Graphics/UI/Cutscene.png" id="3_6cikf"]
+[ext_resource type="Script" path="res://Scripts/UI/ScreenFade.gd" id="3_x8jbm"]
+[ext_resource type="FontFile" uid="uid://dg6f8gbf2j6jw" path="res://Graphics/Fonts/EuropeanTeletextNuevo.ttf" id="5_wl5a3"]
+[ext_resource type="AudioStream" uid="uid://c20knxcsn2fuh" path="res://Sound/Music/HailToTheCheifMinor.wav" id="6_exhhg"]
+
+[sub_resource type="Animation" id="Animation_soxjh"]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ScreenFade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yhogu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ScreenFade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3atb"]
+_data = {
+"FadeOut": SubResource("Animation_soxjh"),
+"RESET": SubResource("Animation_yhogu")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nt30t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1gx7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h36fx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dbw7u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yk6sf"]
+
+[node name="Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yk18l")
+dialogue_resource = ExtResource("2_l6rh2")
+dialogue_start = "intro"
+scene_time = 30.0
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(576, 384)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -274.0
+offset_right = 288.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6cikf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScreenFade" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+script = ExtResource("3_x8jbm")
+opening_animation = "Fade In Black"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ScreenFade"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_b3atb")
+}
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1010.0
+offset_top = 13.0
+offset_right = 1138.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.368627, 0.301961, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_fonts/font = ExtResource("5_wl5a3")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nt30t")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l1gx7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h36fx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dbw7u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yk6sf")
+text = "SKIP"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_exhhg")
+autoplay = true
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

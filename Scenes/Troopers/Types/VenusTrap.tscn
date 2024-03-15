@@ -1,0 +1,191 @@
+[gd_scene load_steps=28 format=3 uid="uid://b1ypj55tmo8bi"]
+
+[ext_resource type="Script" path="res://Scripts/Trooper/VenusTrap.gd" id="1_exoen"]
+[ext_resource type="Script" path="res://Scripts/Resources/TroopResource.gd" id="2_ywn5y"]
+[ext_resource type="Script" path="res://Scripts/State/StateMachine.gd" id="3_8rpj7"]
+[ext_resource type="PackedScene" uid="uid://bi4pogi6i6d0s" path="res://Scenes/Items/Shell.tscn" id="3_wxkac"]
+[ext_resource type="PackedScene" uid="uid://cc8lbidq0tt6v" path="res://Scenes/Items/Mag.tscn" id="4_a4q57"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Wander.gd" id="4_ewtx4"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Follow.gd" id="5_ryih5"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Melee.gd" id="6_rf3x1"]
+[ext_resource type="Script" path="res://Scripts/Sounds/SoundManager.gd" id="8_vtseh"]
+[ext_resource type="AudioStream" uid="uid://ctworvtgeb3x7" path="res://Sound/Voices/Troopers/Trapper/bite1.wav" id="9_sjj0v"]
+[ext_resource type="AudioStream" uid="uid://ba4eyhlnf4l5d" path="res://Sound/Voices/Troopers/Trapper/bite2.wav" id="10_okes1"]
+[ext_resource type="AudioStream" uid="uid://by33m0mppg43a" path="res://Sound/Voices/Troopers/Trapper/bite3.wav" id="11_mpqbo"]
+[ext_resource type="AudioStream" uid="uid://bk485usl1lp2" path="res://Sound/Voices/Troopers/Trapper/hurt1.wav" id="12_mmrvo"]
+[ext_resource type="AudioStream" uid="uid://b17wfkwpvt5v4" path="res://Sound/Voices/Troopers/Trapper/hurt2.wav" id="13_k2qoe"]
+[ext_resource type="AudioStream" uid="uid://dumftgxt7px3a" path="res://Sound/Voices/Troopers/Trapper/idle1.wav" id="14_cb1fm"]
+[ext_resource type="AudioStream" uid="uid://xn208m01713v" path="res://Sound/Voices/Troopers/Trapper/idle2.wav" id="15_4t1w3"]
+[ext_resource type="AudioStream" uid="uid://vgbcbsceodfa" path="res://Sound/Voices/Troopers/Trapper/idle3.wav" id="16_t3ub0"]
+[ext_resource type="Texture2D" uid="uid://fjhkpbjesmh5" path="res://Graphics/Sprites/Trooper/Trapper/Trapper.png" id="17_pq24w"]
+[ext_resource type="Script" path="res://Scripts/Graphics/3DSprite.gd" id="18_awwq5"]
+[ext_resource type="Texture2D" uid="uid://dx32jqtjr4n17" path="res://Graphics/Sprites/Trooper/Trapper/TrapperHead.png" id="19_pnif4"]
+
+[sub_resource type="Resource" id="Resource_v7ok8"]
+script = ExtResource("2_ywn5y")
+health = 40
+speed = 20.0
+melee_damage = 1.0
+proj_damage = 10.0
+melee_dist = 4.0
+follow_dist = 2.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xdygo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7icm"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.160784, 0.360784, 0.027451, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_86pfi"]
+material = SubResource("StandardMaterial3D_j7icm")
+
+[sub_resource type="Animation" id="Animation_mdcyi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoomSprite:anim_col")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_a8ua8"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoomSprite:anim_col")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_60qvq"]
+_data = {
+"RESET": SubResource("Animation_mdcyi"),
+"Walk": SubResource("Animation_a8ua8")
+}
+
+[node name="VenusTrap" type="CharacterBody3D" node_paths=PackedStringArray("sound_manager") groups=["Trooper"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_exoen")
+troopResource = SubResource("Resource_v7ok8")
+loot = Array[PackedScene]([ExtResource("3_wxkac"), ExtResource("4_a4q57")])
+drop_percent = 30
+sound_manager = NodePath("SoundManager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xdygo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+mesh = SubResource("SphereMesh_86pfi")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_8rpj7")
+initial_state = NodePath("Follow")
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop", "next_state_close", "next_state")]
+script = ExtResource("5_ryih5")
+action_time = 1.0
+troop = NodePath("../..")
+next_state_close = NodePath("../Melee")
+next_state = NodePath("../Wander")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop", "next_state_close", "next_state")]
+script = ExtResource("4_ewtx4")
+wander_time_range = Vector2(0.25, 1)
+action_time = 1.5
+act_percent = 50
+attack_on_sight = false
+troop = NodePath("../..")
+next_state_close = NodePath("../Melee")
+next_state = NodePath("../Follow")
+
+[node name="Melee" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop", "next_state")]
+script = ExtResource("6_rf3x1")
+attack_time = 0.2
+troop = NodePath("../..")
+next_state = NodePath("../Wander")
+
+[node name="SoundManager" type="Node3D" parent="." node_paths=PackedStringArray("idle_sounds", "hurt_sounds", "melee_sounds")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("8_vtseh")
+idle_sounds = [NodePath("idle1"), NodePath("idle2"), NodePath("idle3")]
+hurt_sounds = [NodePath("hurt1"), NodePath("hurt2")]
+melee_sounds = [NodePath("bite1"), NodePath("bite2"), NodePath("bite3")]
+
+[node name="idle1" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("14_cb1fm")
+volume_db = -10.0
+
+[node name="idle2" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("15_4t1w3")
+volume_db = -10.0
+
+[node name="idle3" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("16_t3ub0")
+volume_db = -10.0
+
+[node name="bite1" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("9_sjj0v")
+volume_db = -10.0
+
+[node name="bite2" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("10_okes1")
+volume_db = -10.0
+
+[node name="bite3" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("11_mpqbo")
+volume_db = -10.0
+
+[node name="hurt1" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("12_mmrvo")
+volume_db = -10.0
+
+[node name="hurt2" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("13_k2qoe")
+volume_db = -10.0
+
+[node name="DoomSprite" type="Sprite3D" parent="." groups=["3dSprite"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+pixel_size = 0.03
+billboard = 2
+texture_filter = 0
+texture = ExtResource("17_pq24w")
+hframes = 4
+vframes = 5
+script = ExtResource("18_awwq5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DoomSprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_60qvq")
+}
+autoplay = "Walk"
+
+[node name="MiniMapHead" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+rotation_edit_mode = 2
+layers = 524288
+offset = Vector2(6, 0)
+pixel_size = 0.05
+billboard = 1
+double_sided = false
+texture_filter = 0
+texture = ExtResource("19_pnif4")

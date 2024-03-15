@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcih3ehcvbnm8"]
+
+[ext_resource type="Script" path="res://Scripts/Fireballs/Fireball.gd" id="1_o1jip"]
+[ext_resource type="Texture2D" uid="uid://bc6dsjq224s1t" path="res://Graphics/Sprites/Trooper/Potbelly/Seed.png" id="2_mdctg"]
+[ext_resource type="AudioStream" uid="uid://dkm10yqra6nw5" path="res://Sound/SFX/Trooper/Seed.wav" id="3_hemcr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uipnh"]
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.454902, 0.662745, 0.286275, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3j03h"]
+material = SubResource("StandardMaterial3D_uipnh")
+radius = 0.188
+height = 0.375
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8vdui"]
+radius = 0.287199
+
+[node name="Bullet" type="CharacterBody3D"]
+script = ExtResource("1_o1jip")
+speed = 25.0
+damage = 1
+lifespan = 5.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_3j03h")
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_8vdui")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+pixel_size = 0.02
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_mdctg")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_hemcr")
+volume_db = -7.0
+autoplay = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

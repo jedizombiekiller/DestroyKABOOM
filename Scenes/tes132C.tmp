@@ -1,0 +1,128 @@
+[gd_scene load_steps=12 format=3 uid="uid://dnu85a20q7g65"]
+
+[ext_resource type="Script" path="res://Scripts/GameManagement/GameScene.gd" id="1_ek1im"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/Spawner.gd" id="2_ewlxl"]
+[ext_resource type="Script" path="res://Scripts/UI/Money.gd" id="3_7tpv0"]
+[ext_resource type="PackedScene" uid="uid://bbhshsky1v87x" path="res://Scenes/Protag.tscn" id="4_58ynu"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/ProtagCamera.gd" id="4_qiyf2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8sj8"]
+albedo_color = Color(0.117647, 0.0117647, 0.168627, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ao8qa"]
+albedo_color = Color(0.117647, 0.0117647, 0.168627, 1)
+
+[sub_resource type="Environment" id="Environment_8cgvt"]
+background_color = Color(0.478431, 0.0352941, 0.478431, 1)
+ambient_light_energy = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tya0h"]
+size = Vector3(29, 0.3, 44)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e7ks6"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ncdqv"]
+vertices = PackedVector3Array(15.25, 8, -23, 15.5, 8, -22.5, 17, 8, -22.5, 15.25, 8, -23, 17, 8, -22.5, 17, 8, -25, 0, 8, 24, 0, 8, 23.5, -15.25, 8, 23.25, -17, 8, 24, 0, 8, 24, -15.25, 8, 23.25, 15.25, 8, -23, 17, 8, -25, -17, 8, -25, -15.25, 8, -22.75, 15.25, 8, -23, -17, 8, -25, -15.25, 8, -22.75, -17, 8, -25, -17, 8, 24, -15.25, 8, 23.25, -15.25, 8, -22.75, -17, 8, 24, 15.5, 8, 23.25, 0, 8, 23.5, 0, 8, 24, 15.5, 8, 23.25, 0, 8, 24, 17, 8, 24, 17, 8, -22.5, 15.5, 8, -22.5, 15.5, 8, 23.25, 17, 8, 24, 17, 8, -22.5, 15.5, 8, 23.25, 8.75, 0, 10.5, 9, 0, 12.25, 14.5, 0, 12.25, -14.25, 0, 12.75, 0.75, 0, 12.75, 1, 0, 10.5, 8.75, 0, 10.5, 14.5, 0, 12.25, 14.5, 0, -21.75, 1, 0, 10.5, 8.75, 0, 10.5, 14.5, 0, -21.75, 1, 0, 10.5, 14.5, 0, -21.75, -14.25, 0, -21.75, -14.25, 0, 12.75, 1, 0, 10.5, -14.25, 0, -21.75, 3, 4, 13.5, 8, 4, 13.25, 8, 4, 11.5, 3, 4, 13.5, 8, 4, 11.5, 1.75, 4, 11.5, 1.75, 4, 22.5, 3, 4, 22.5, 3, 4, 13.5, 1.75, 4, 11.5, 1.75, 4, 22.5, 3, 4, 13.5, 14.5, 0, 12.25, 9, 0, 12.25, 8.75, 0, 14.25, 8.75, 0, 14.25, 4, 0, 14.25, 4, 0, 22.5, 8.75, 0, 14.25, 4, 0, 22.5, 14.5, 0, 22.5, 14.5, 0, 12.25, 8.75, 0, 14.25, 14.5, 0, 22.5, 0.75, 0, 12.75, -14.25, 0, 12.75, -14.25, 0, 22.5, 0.75, 0, 12.75, -14.25, 0, 22.5, 0.75, -0.25, 22.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(14, 13, 12), PackedInt32Array(17, 16, 15), PackedInt32Array(18, 20, 19), PackedInt32Array(23, 22, 21), PackedInt32Array(24, 26, 25), PackedInt32Array(27, 29, 28), PackedInt32Array(32, 31, 30), PackedInt32Array(35, 34, 33), PackedInt32Array(38, 37, 36), PackedInt32Array(41, 40, 39), PackedInt32Array(44, 43, 42), PackedInt32Array(47, 46, 45), PackedInt32Array(48, 50, 49), PackedInt32Array(51, 53, 52), PackedInt32Array(56, 55, 54), PackedInt32Array(59, 58, 57), PackedInt32Array(62, 61, 60), PackedInt32Array(65, 64, 63), PackedInt32Array(68, 67, 66), PackedInt32Array(71, 70, 69), PackedInt32Array(74, 73, 72), PackedInt32Array(77, 76, 75), PackedInt32Array(80, 79, 78), PackedInt32Array(83, 82, 81)]
+geometry_parsed_geometry_type = 1
+geometry_source_geometry_mode = 1
+vertices_per_polygon = 3.0
+
+[node name="GameScene" type="Node3D"]
+script = ExtResource("1_ek1im")
+starting_energy = 50
+
+[node name="Stage" type="CSGBox3D" parent="." groups=["navigation_mesh_source_group"]]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 2.5, -0.5)
+use_collision = true
+size = Vector3(7, 2, 10)
+material = SubResource("StandardMaterial3D_l8sj8")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.15)
+operation = 2
+size = Vector3(6, 1.6, 9.1)
+material = SubResource("StandardMaterial3D_ao8qa")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Stage"]
+environment = SubResource("Environment_8cgvt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Stage"]
+transform = Transform3D(0.2, 0, 0, 0, 0.0517638, 0.193185, 0, -0.193185, 0.0517638, 0, 2.9, 0.1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.497268, -0.28, 3.61892)
+size = Vector3(0.39502, 1, 2.54639)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999758, -0.28, 2.59573)
+size = Vector3(1.4, 1, 0.5)
+
+[node name="MiniMap" type="Camera3D" parent="."]
+transform = Transform3D(1, 2.13163e-14, 9.31765e-22, 0, -4.37114e-08, 1, 2.13163e-14, -1, -4.37114e-08, 0, 40, 0)
+projection = 1
+current = true
+size = 53.252
+
+[node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.45, 16)
+script = ExtResource("2_ewlxl")
+
+[node name="Box" type="CSGBox3D" parent="Spawner"]
+size = Vector3(1, 0.1, 1)
+
+[node name="EnergyTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Protag" parent="." instance=ExtResource("4_58ynu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.61064, 1, -17.8632)
+player_controlled = false
+
+[node name="ValidTP" type="Area3D" parent="."]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ValidTP"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0.5)
+shape = SubResource("BoxShape3D_tya0h")
+
+[node name="Computer1" type="Node3D" parent="." groups=["Computer"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
+metadata/active = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Computer1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+mesh = SubResource("BoxMesh_e7ks6")
+
+[node name="ProtagCamera" type="Camera3D" parent="."]
+current = true
+script = ExtResource("4_qiyf2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Money" type="Label" parent="CanvasLayer"]
+offset_right = 49.0
+offset_bottom = 29.0
+scale = Vector2(3.025, 3.025)
+text = "1000"
+script = ExtResource("3_7tpv0")
+
+[node name="Health" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("protag")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -309.0
+offset_right = -206.0
+offset_bottom = 29.0
+grow_horizontal = 0
+scale = Vector2(3.025, 3.025)
+text = "1000"
+horizontal_alignment = 2
+script = ExtResource("3_7tpv0")
+protag = NodePath("../../Protag")
+type = 1
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_ncdqv")
+
+[connection signal="timeout" from="EnergyTimer" to="." method="_on_energy_timer_timeout"]
+[connection signal="area_entered" from="ValidTP" to="." method="_on_valid_tp_request"]

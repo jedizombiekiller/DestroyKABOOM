@@ -1,0 +1,190 @@
+[gd_scene load_steps=28 format=3 uid="uid://cq8aloyc5q7gm"]
+
+[ext_resource type="Script" path="res://Scripts/Trooper/Archville.gd" id="1_m2frw"]
+[ext_resource type="Script" path="res://Scripts/Resources/TroopResource.gd" id="2_wtsei"]
+[ext_resource type="PackedScene" uid="uid://jur1usq04sek" path="res://Scenes/Items/BeerPack.tscn" id="3_f5n4o"]
+[ext_resource type="Script" path="res://Scripts/State/StateMachine.gd" id="3_t0gj7"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Wander.gd" id="4_qm0n4"]
+[ext_resource type="PackedScene" uid="uid://cc8lbidq0tt6v" path="res://Scenes/Items/Mag.tscn" id="4_sprhi"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Melee.gd" id="5_p77xg"]
+[ext_resource type="Script" path="res://Scripts/State/TroopStates/Teleport.gd" id="6_ycgq6"]
+[ext_resource type="Script" path="res://Scripts/Sounds/SoundManager.gd" id="9_8r5wc"]
+[ext_resource type="AudioStream" uid="uid://w80npdfcpqon" path="res://Sound/Voices/Troopers/Mageshroom/idle1.wav" id="10_mt35a"]
+[ext_resource type="AudioStream" uid="uid://cwu2rg6nxxsg" path="res://Sound/Voices/Troopers/Mageshroom/idle2.wav" id="11_s346f"]
+[ext_resource type="AudioStream" uid="uid://4c7rtl2r1g8r" path="res://Sound/Voices/Troopers/Mageshroom/Hurt1.wav" id="12_ie8u3"]
+[ext_resource type="AudioStream" uid="uid://h33irfcxrg3u" path="res://Sound/Voices/Troopers/Mageshroom/hurt2.wav" id="13_0h7pj"]
+[ext_resource type="AudioStream" uid="uid://ckkrbrut3nbtk" path="res://Sound/Voices/Troopers/Mageshroom/teleport1.wav" id="14_q4m1u"]
+[ext_resource type="AudioStream" uid="uid://toin3vyhgrhc" path="res://Sound/Voices/Troopers/Mageshroom/teleport2.wav" id="15_bi5bp"]
+[ext_resource type="Texture2D" uid="uid://da0qsvp6473x" path="res://Graphics/Sprites/Trooper/Shroom/shroom.png" id="16_eqb4l"]
+[ext_resource type="Script" path="res://Scripts/Graphics/3DSprite.gd" id="17_cfhyj"]
+[ext_resource type="Texture2D" uid="uid://0dl7qfni3837" path="res://Graphics/Sprites/Trooper/Shroom/Head.png" id="18_p1pf2"]
+
+[sub_resource type="Resource" id="Resource_wishx"]
+script = ExtResource("2_wtsei")
+health = 100
+speed = 10.0
+melee_damage = 10.0
+proj_damage = 10.0
+melee_dist = 50.0
+follow_dist = 5.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xdygo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dssb"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.388235, 0.196078, 0.333333, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e3goj"]
+material = SubResource("StandardMaterial3D_8dssb")
+radius = 0.325
+height = 2.3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_klmdv"]
+height = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ugixt"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="Animation" id="Animation_mdcyi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoomSprite:anim_col")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_a8ua8"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoomSprite:anim_col")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_60qvq"]
+_data = {
+"RESET": SubResource("Animation_mdcyi"),
+"Walk": SubResource("Animation_a8ua8")
+}
+
+[node name="Archville" type="CharacterBody3D" node_paths=PackedStringArray("sound_manager") groups=["Trooper"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_m2frw")
+teleport_range = 100
+troopResource = SubResource("Resource_wishx")
+loot = Array[PackedScene]([ExtResource("3_f5n4o"), ExtResource("4_sprhi")])
+sound_manager = NodePath("SoundManager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xdygo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_e3goj")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_t0gj7")
+initial_state = NodePath("Wander")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop", "next_state_close", "next_state")]
+script = ExtResource("4_qm0n4")
+act_percent = 50
+start_with_action = false
+troop = NodePath("../..")
+next_state_close = NodePath("../Teleport")
+next_state = NodePath("../Melee")
+
+[node name="Melee" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop", "next_state")]
+script = ExtResource("5_p77xg")
+attack_time = 1.5
+continuous = false
+troop = NodePath("../..")
+next_state = NodePath("../Wander")
+
+[node name="Teleport" type="Node" parent="StateMachine" node_paths=PackedStringArray("troop", "next_state")]
+script = ExtResource("6_ycgq6")
+teleport_time = 1.0
+troop = NodePath("../..")
+next_state = NodePath("../Wander")
+
+[node name="TeleportPointer" type="Area3D" parent="." groups=["teleport_pointer"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TeleportPointer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("CapsuleShape3D_klmdv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TeleportPointer"]
+visible = false
+mesh = SubResource("SphereMesh_ugixt")
+
+[node name="SoundManager" type="Node3D" parent="." node_paths=PackedStringArray("idle_sounds", "hurt_sounds", "misc_sounds")]
+script = ExtResource("9_8r5wc")
+idle_sounds = [NodePath("idle1"), NodePath("idle2")]
+hurt_sounds = [NodePath("hurt1"), NodePath("hurt2")]
+misc_sounds = [NodePath("teleport1"), NodePath("teleport2")]
+
+[node name="idle1" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("10_mt35a")
+
+[node name="idle2" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("11_s346f")
+
+[node name="hurt1" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("12_ie8u3")
+
+[node name="hurt2" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("13_0h7pj")
+
+[node name="teleport1" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("14_q4m1u")
+
+[node name="teleport2" type="AudioStreamPlayer3D" parent="SoundManager"]
+stream = ExtResource("15_bi5bp")
+
+[node name="DoomSprite" type="Sprite3D" parent="." groups=["3dSprite"]]
+transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 0.2, 0)
+pixel_size = 0.06
+billboard = 2
+texture_filter = 0
+texture = ExtResource("16_eqb4l")
+hframes = 4
+vframes = 5
+script = ExtResource("17_cfhyj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DoomSprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_60qvq")
+}
+autoplay = "Walk"
+
+[node name="MiniMapHead" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+rotation_edit_mode = 2
+layers = 524288
+pixel_size = 0.05
+billboard = 1
+double_sided = false
+texture_filter = 0
+texture = ExtResource("18_p1pf2")

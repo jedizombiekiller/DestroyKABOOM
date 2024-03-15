@@ -1,0 +1,143 @@
+[gd_scene load_steps=15 format=3 uid="uid://c0jakjp42gskn"]
+
+[ext_resource type="Script" path="res://Scripts/UI/ScreenFade.gd" id="1_owp5b"]
+[ext_resource type="Script" path="res://Scripts/UI/WinScreen.gd" id="1_s7uc1"]
+[ext_resource type="FontFile" uid="uid://bmdumbmfm287p" path="res://Graphics/Fonts/RussoOne-Regular.ttf" id="2_cif8b"]
+[ext_resource type="Resource" uid="uid://calvnqm1q8x2u" path="res://Dialogue/Player/PlayerDialogue.dialogue" id="2_sxx2n"]
+[ext_resource type="FontFile" uid="uid://b8iejqq16bhuq" path="res://Graphics/Fonts/HandDrawnShapes.otf" id="3_8sqt7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g5jt6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7eile"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7nwd2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ign3c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cx8pv"]
+
+[sub_resource type="Animation" id="Animation_pq3ae"]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g8c20"]
+resource_name = "FadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q3gkc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5ydh"]
+_data = {
+"FadeIn": SubResource("Animation_pq3ae"),
+"FadeOut": SubResource("Animation_g8c20"),
+"RESET": SubResource("Animation_q3gkc")
+}
+
+[node name="Win" type="Node2D"]
+script = ExtResource("1_s7uc1")
+dialogue_resource = ExtResource("2_sxx2n")
+dialogue_start = "start"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect"]
+visible = false
+layout_mode = 0
+offset_left = 70.0
+offset_top = 73.0
+offset_right = 1123.0
+offset_bottom = 589.0
+theme_override_fonts/font = ExtResource("3_8sqt7")
+theme_override_font_sizes/font_size = 100
+text = "\"This game stinks! I'm getting a refund!\"
+- The Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -83.0
+offset_right = -17.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.141176, 0.65098, 0.329412, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_cif8b")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g5jt6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7eile")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7nwd2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ign3c")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cx8pv")
+text = "BACK TO MAIN MENU"
+
+[node name="ScreenFade" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+script = ExtResource("1_owp5b")
+opening_animation = "Fade In Black"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ScreenFade"]
+libraries = {
+"": SubResource("AnimationLibrary_v5ydh")
+}
+
+[connection signal="button_down" from="CanvasLayer/MenuButton" to="." method="_on_menu_button_button_down"]

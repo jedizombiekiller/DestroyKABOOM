@@ -1,0 +1,154 @@
+[gd_scene load_steps=14 format=3 uid="uid://dnu85a20q7g65"]
+
+[ext_resource type="Script" path="res://Scripts/GameManagement/GameScene.gd" id="1_ek1im"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/Spawner.gd" id="2_ewlxl"]
+[ext_resource type="Script" path="res://Scripts/UI/Money.gd" id="3_7tpv0"]
+[ext_resource type="PackedScene" uid="uid://bbhshsky1v87x" path="res://Scenes/Protag.tscn" id="4_58ynu"]
+[ext_resource type="PackedScene" uid="uid://cukovnwx0kyij" path="res://Scenes/Computer/computer.tscn" id="4_pn7os"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/ProtagCamera.gd" id="4_qiyf2"]
+[ext_resource type="Script" path="res://Scripts/UI/ProgressBar.gd" id="7_abmg3"]
+[ext_resource type="AudioStream" uid="uid://c17aswqqqk364" path="res://Sound/Music/02. At Doom's Gate.wav" id="8_eua63"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8sj8"]
+albedo_color = Color(0.117647, 0.0117647, 0.168627, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ao8qa"]
+albedo_color = Color(0.117647, 0.0117647, 0.168627, 1)
+
+[sub_resource type="Environment" id="Environment_8cgvt"]
+background_color = Color(0.478431, 0.0352941, 0.478431, 1)
+ambient_light_energy = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tya0h"]
+size = Vector3(29, 0.3, 44)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ncdqv"]
+vertices = PackedVector3Array(-16.75, 8, 23.75, -15.75, 8, 23.75, -16.25, 8, 23.25, -16.75, 8, 23.75, -16.25, 8, 23.25, -16.25, 8, -22.5, -16.75, 8, -24.75, -15.75, 8, -23, 31.75, 8, -23.25, 31.75, 8, -24.75, -16.75, 8, -24.75, -16.75, 8, -24.75, -16.25, 8, -22.5, -15.75, 8, -23, 14.25, 0, -18.25, 15.5, 0, -18.25, 15.5, 0, -21.5, 13.75, 0, -17.75, 14.25, 0, -18.25, 15.5, 0, -21.5, -14.75, 0, -21.5, 9.75, 0, 10.75, 9.75, 0, 12.25, 13.75, 0, 12.25, 9.25, 0, 10.25, 9.75, 0, 10.75, 13.75, 0, 12.25, 13.75, 0, -17.75, -14.75, 0, 12, 1, 0, 12.25, 1, 0, 10.75, -14.75, 0, 12, 1, 0, 10.75, 1.5, 0, 10.25, 13.75, 0, -17.75, -14.75, 0, -21.5, 1.5, 0, 10.25, 9.25, 0, 10.25, 13.75, 0, -17.75, 15.5, 0, -21.5, 15.5, 0, -18.25, 17, 0, -18.25, 15.5, 0, -21.5, 17, 0, -18.25, 17.5, 0, -17.75, 30.75, 0, -21.5, 17.5, 0, -17.75, 17.5, 0, 22.25, 30.75, 0, 22.25, 30.75, 0, -21.5, 14.75, 8, 23.5, 16.5, 8, 23.75, 16, 8, 23.25, 15.25, 8, 23.25, 15.75, 8, -17, 15, 8, -17, 15.25, 8, 23.25, 16, 8, 23.25, 3.75, 4, 13, 8.25, 4, 13, 8.25, 4, 11.75, 2.5, 4, 11.75, 2.5, 4, 22.25, 3.25, 4, 22.25, 3.25, 4, 13.5, 2.5, 4, 11.75, 3.25, 4, 13.5, 3.75, 4, 13, 2.5, 4, 11.75, 1, 0, 12.25, -14.75, 0, 12, -14.75, 0, 22.25, 1, 0, 22.25, 13.75, 0, 12.25, 9.75, 0, 12.25, 9.75, 0, 14, 13.75, 0, 12.25, 9.75, 0, 14, 9.25, 0, 14.5, 13.75, 0, 22.25, 9.25, 0, 14.5, 4.75, 0, 14.5, 4.75, 0, 22.25, 13.75, 0, 22.25)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(13, 12, 11), PackedInt32Array(16, 15, 14), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 20), PackedInt32Array(23, 22, 21), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(30, 29, 28), PackedInt32Array(32, 31, 33), PackedInt32Array(33, 31, 35), PackedInt32Array(33, 35, 34), PackedInt32Array(38, 37, 36), PackedInt32Array(41, 40, 39), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 45), PackedInt32Array(47, 46, 48), PackedInt32Array(48, 46, 49), PackedInt32Array(53, 52, 50), PackedInt32Array(50, 52, 51), PackedInt32Array(57, 56, 54), PackedInt32Array(54, 56, 55), PackedInt32Array(59, 58, 60), PackedInt32Array(60, 58, 61), PackedInt32Array(63, 62, 64), PackedInt32Array(64, 62, 65), PackedInt32Array(68, 67, 66), PackedInt32Array(72, 71, 69), PackedInt32Array(69, 71, 70), PackedInt32Array(75, 74, 73), PackedInt32Array(77, 76, 78), PackedInt32Array(78, 76, 79), PackedInt32Array(81, 80, 82), PackedInt32Array(82, 80, 83)]
+geometry_parsed_geometry_type = 1
+geometry_source_geometry_mode = 1
+agent_height = 2.0
+agent_radius = 0.55
+
+[node name="GameScene" type="Node3D" node_paths=PackedStringArray("current_computer", "protag")]
+script = ExtResource("1_ek1im")
+starting_energy = 50
+current_computer = NodePath("Computer")
+protag = NodePath("Protag")
+
+[node name="Stage" type="CSGBox3D" parent="." groups=["navigation_mesh_source_group"]]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 7.5, 2.5, -0.5)
+use_collision = true
+size = Vector3(10, 2, 10)
+material = SubResource("StandardMaterial3D_l8sj8")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.2, 0.15)
+operation = 2
+size = Vector3(6, 1.6, 9.1)
+material = SubResource("StandardMaterial3D_ao8qa")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0.2, 0.15)
+operation = 2
+size = Vector3(3, 1.6, 9.1)
+material = SubResource("StandardMaterial3D_ao8qa")
+
+[node name="Path" type="CSGBox3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56, 0.2, -3.9)
+operation = 2
+size = Vector3(1, 1.6, 1)
+material = SubResource("StandardMaterial3D_ao8qa")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Stage"]
+environment = SubResource("Environment_8cgvt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Stage"]
+transform = Transform3D(0.2, 0, 0, 0, 0.0517638, 0.193185, 0, -0.193185, 0.0517638, 0, 2.9, 0.1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.902732, -0.28, 3.61892)
+size = Vector3(0.39502, 1, 2.54639)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.400242, -0.28, 2.59573)
+size = Vector3(1.4, 1, 0.5)
+
+[node name="Computer" parent="." node_paths=PackedStringArray("next_computer") instance=ExtResource("4_pn7os")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3, 0, 0)
+active = true
+next_computer = NodePath("../Computer2")
+
+[node name="Computer2" parent="." instance=ExtResource("4_pn7os")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7, 0, 0)
+
+[node name="MiniMap" type="Camera3D" parent="."]
+transform = Transform3D(1, 2.13163e-14, 9.31765e-22, 0, -4.37114e-08, 1, 2.13163e-14, -1, -4.37114e-08, 0, 40, 0)
+current = true
+size = 53.252
+
+[node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.45, 16)
+script = ExtResource("2_ewlxl")
+
+[node name="Box" type="CSGBox3D" parent="Spawner"]
+size = Vector3(1, 0.1, 1)
+
+[node name="EnergyTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Protag" parent="." instance=ExtResource("4_58ynu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.61064, 1, 20.1368)
+player_controlled = false
+
+[node name="ValidTP" type="Area3D" parent="."]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ValidTP"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0.5)
+shape = SubResource("BoxShape3D_tya0h")
+
+[node name="ProtagCamera" type="Camera3D" parent="."]
+current = true
+script = ExtResource("4_qiyf2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Money" type="Label" parent="CanvasLayer"]
+offset_right = 49.0
+offset_bottom = 29.0
+scale = Vector2(3.025, 3.025)
+text = "1000"
+script = ExtResource("3_7tpv0")
+
+[node name="Health" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("protag")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -309.0
+offset_right = -206.0
+offset_bottom = 29.0
+grow_horizontal = 0
+scale = Vector2(3.025, 3.025)
+text = "1000"
+horizontal_alignment = 2
+script = ExtResource("3_7tpv0")
+protag = NodePath("../../Protag")
+type = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 318.0
+offset_top = 18.0
+offset_right = 786.0
+offset_bottom = 45.0
+script = ExtResource("7_abmg3")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_ncdqv")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_eua63")
+autoplay = true
+
+[connection signal="timeout" from="EnergyTimer" to="." method="_on_energy_timer_timeout"]
+[connection signal="area_entered" from="ValidTP" to="." method="_on_valid_tp_request"]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgdlupjuomx6k"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Beer.gd" id="1_f2yd1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q17jj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_522cx"]
+shading_mode = 0
+albedo_color = Color(0.203922, 0.392157, 0.215686, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l4bv6"]
+material = SubResource("StandardMaterial3D_522cx")
+radius = 0.25
+height = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0664x"]
+radius = 0.75
+
+[node name="Beer" type="CharacterBody3D" groups=["Health_Item", "Item"]]
+script = ExtResource("1_f2yd1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_q17jj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_l4bv6")
+skeleton = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_0664x")
+
+[connection signal="body_entered" from="Area3D" to="." method="body_entered"]

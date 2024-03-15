@@ -1,0 +1,1711 @@
+[gd_scene load_steps=64 format=3 uid="uid://dow1uwh2xvvus"]
+
+[ext_resource type="Script" path="res://Scripts/GameManagement/GameScene.gd" id="1_mm433"]
+[ext_resource type="PackedScene" uid="uid://cukovnwx0kyij" path="res://Scenes/Computer/computer.tscn" id="2_i7nyc"]
+[ext_resource type="PackedScene" uid="uid://b3h6abkn7m3vv" path="res://Graphics/Models/Map/Mesh/entire_map.tscn" id="2_if7tl"]
+[ext_resource type="PackedScene" uid="uid://v6etysutahot" path="res://Graphics/Models/Map/Mesh/minimap.tscn" id="3_ho3do"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/Spawner.gd" id="3_sihyi"]
+[ext_resource type="PackedScene" uid="uid://bbhshsky1v87x" path="res://Scenes/Protag.tscn" id="4_vng4s"]
+[ext_resource type="ArrayMesh" uid="uid://dd6q6svgu1q5y" path="res://Graphics/Models/Map/Collisions.obj" id="4_vv2bj"]
+[ext_resource type="AudioStream" uid="uid://c02gyqfpm7a7c" path="res://Sound/Music/punch_your_way_through.wav" id="7_npxu0"]
+[ext_resource type="Script" path="res://Scripts/UI/UI.gd" id="8_047ux"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/ProtagCamera.gd" id="8_h42fx"]
+[ext_resource type="Script" path="res://Scripts/UI/Shop.gd" id="9_4723a"]
+[ext_resource type="Script" path="res://Scripts/GameManagement/MiniMapCamera.gd" id="10_2h3ma"]
+[ext_resource type="Theme" uid="uid://c5nqjcb4k4anx" path="res://Graphics/UI/Themes/Buttons.tres" id="10_t486a"]
+[ext_resource type="Script" path="res://Scripts/UI/Palette.gd" id="10_x2l5c"]
+[ext_resource type="Texture2D" uid="uid://dx32jqtjr4n17" path="res://Graphics/Sprites/Trooper/Trapper/TrapperHead.png" id="11_blmmp"]
+[ext_resource type="Texture2D" uid="uid://7exo8ejhlokh" path="res://Graphics/UI/Textures/Buttons/Trapper.png" id="12_j5d5d"]
+[ext_resource type="Texture2D" uid="uid://dkig5acyv0sd" path="res://Graphics/Sprites/Trooper/Kernel/KernelHead.png" id="13_dvuu2"]
+[ext_resource type="Texture2D" uid="uid://u0ibt86ftt8o" path="res://Graphics/Sprites/Trooper/Potbelly/PotbellyHead.png" id="13_p7x1y"]
+[ext_resource type="Texture2D" uid="uid://b7ifvmb0640dn" path="res://Graphics/UI/Textures/Buttons/Kernel.png" id="15_4tcdb"]
+[ext_resource type="Texture2D" uid="uid://0dl7qfni3837" path="res://Graphics/Sprites/Trooper/Shroom/Head.png" id="15_tasrw"]
+[ext_resource type="Texture2D" uid="uid://f180fqmijtor" path="res://Graphics/UI/Textures/Buttons/Potbelly.png" id="17_52nn2"]
+[ext_resource type="Texture2D" uid="uid://chomq3uvfpiu8" path="res://Graphics/UI/Textures/BACKDROP.png" id="18_je16c"]
+[ext_resource type="Texture2D" uid="uid://cbpngs15frtdv" path="res://Graphics/UI/Textures/Buttons/Fungler.png" id="19_rb3pb"]
+[ext_resource type="FontFile" uid="uid://bmdl7bhv61xxw" path="res://Graphics/Fonts/ChainsawCarnage.ttf" id="20_re3eg"]
+[ext_resource type="Texture2D" uid="uid://brvap2q2fpqpp" path="res://Graphics/UI/Textures/9patch.png" id="20_sggvt"]
+[ext_resource type="Script" path="res://Scripts/Sounds/MusicPlayer.gd" id="21_1i55v"]
+[ext_resource type="Script" path="res://Scripts/UI/GunUI.gd" id="21_d6a0r"]
+[ext_resource type="Texture2D" uid="uid://b2riixfdh04ny" path="res://Graphics/Sprites/Effects/explosion_pixelfied.png" id="21_pfkwb"]
+[ext_resource type="Texture2D" uid="uid://cdbldn8jbm1un" path="res://Graphics/Sprites/Kaboom/Shotgun.png" id="21_qxdvm"]
+[ext_resource type="Texture2D" uid="uid://clbdi3duloboh" path="res://Graphics/Sprites/Kaboom/Health.png" id="22_yqlbd"]
+[ext_resource type="AudioStream" uid="uid://g2jvjmmfafpg" path="res://Sound/Music/airport_attack.wav" id="23_evdyk"]
+[ext_resource type="Script" path="res://Scripts/UI/ScreenFade.gd" id="24_42unm"]
+[ext_resource type="Texture2D" uid="uid://didmnypo8mtg7" path="res://Graphics/Sprites/Kaboom/AK47.png" id="24_k8oei"]
+[ext_resource type="Texture2D" uid="uid://cy12aed23xxrv" path="res://Graphics/Sprites/Kaboom/Revolver.png" id="25_0p0qi"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/Dialogue.gd" id="35_4qdhu"]
+[ext_resource type="Script" path="res://Scripts/Sounds/UISounds.gd" id="36_yavun"]
+[ext_resource type="AudioStream" uid="uid://tse41n6xa0ii" path="res://Sound/SFX/UI/Click2.wav" id="37_tsl5w"]
+[ext_resource type="AudioStream" uid="uid://b2ohg7gk15rhu" path="res://Sound/SFX/UI/Click1.wav" id="38_opme0"]
+[ext_resource type="AudioStream" uid="uid://nc70du1fx03x" path="res://Sound/SFX/UI/8Bit.wav" id="39_g1qrb"]
+[ext_resource type="AudioStream" uid="uid://ddybdnvk0e8v4" path="res://Sound/SFX/UI/Bloop.wav" id="40_wnys7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k4dqk"]
+load_path = "res://.godot/imported/skybox.png-a69816387e20da51de86e6615c411ddc.s3tc.ctex"
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_u6efr"]
+panorama = SubResource("CompressedTexture2D_k4dqk")
+
+[sub_resource type="Sky" id="Sky_wabv7"]
+sky_material = SubResource("PanoramaSkyMaterial_u6efr")
+
+[sub_resource type="Environment" id="Environment_6jjym"]
+background_mode = 2
+sky = SubResource("Sky_wabv7")
+ambient_light_source = 2
+ambient_light_color = Color(0.466667, 0.466667, 0.466667, 1)
+reflected_light_source = 1
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ec2is"]
+vertices = PackedVector3Array(4.83579, 0.297325, -62.6642, 7.08579, 0.297325, -62.6642, 7.08579, 0.297325, -64.4142, 4.83579, 0.297325, -64.4142, 7.58579, 0.297325, -64.9142, 51.0858, 0.297325, -64.9142, 51.0858, 0.297325, -91.1642, 0.835786, 0.297325, -91.1642, 4.33579, 0.297325, -64.9142, 4.83579, 0.297325, -64.4142, 7.08579, 0.297325, -64.4142, 7.58579, 0.297325, -64.9142, 0.835786, 0.297325, -91.1642, 0.835786, 0.297325, -91.1642, 0.835786, 0.297325, -64.9142, 4.33579, 0.297325, -64.9142, -0.164214, 2.29733, -63.4142, -0.664214, 2.29733, -63.9142, -0.664214, 2.29733, -63.1642, 2.58579, 2.29733, -63.1642, 3.33579, 2.29733, -62.6642, 3.33579, 2.29733, -63.4142, 2.58579, 2.29733, -63.1642, 3.33579, 2.29733, -63.4142, -0.164214, 2.29733, -63.4142, -0.664214, 2.29733, -63.1642, 52.5858, 2.29733, -63.1642, 52.5858, 2.29733, -63.9142, 52.0858, 2.29733, -63.4142, 8.58579, 2.29733, -63.4142, 8.58579, 2.29733, -62.6642, 9.33579, 2.29733, -63.1642, 9.33579, 2.29733, -63.1642, 52.5858, 2.29733, -63.1642, 52.0858, 2.29733, -63.4142, 8.58579, 2.29733, -63.4142, 7.08579, 0.297325, -59.6642, 7.08579, 0.297325, -62.6642, 4.83579, 0.297325, -62.6642, 4.83579, 0.297325, -59.6642, 7.58579, 0.297325, -59.1642, 0.835786, 0.297325, -48.9142, 28.3358, 0.297325, -48.9142, 28.8358, 0.297325, -59.1642, 7.58579, 0.297325, -59.1642, 7.08579, 0.297325, -59.6642, 4.83579, 0.297325, -59.6642, 4.33579, 0.297325, -59.1642, 0.835786, 0.297325, -48.9142, 4.33579, 0.297325, -59.1642, 0.835786, 0.297325, -59.1642, 0.835786, 0.297325, -48.9142, 28.3358, 0.297325, -48.9142, 28.8358, 0.297325, -48.4142, 28.8358, 0.297325, -59.1642, -0.664214, 5.29733, -60.9142, -0.664214, 5.29733, -60.1642, -0.164214, 5.29733, -60.6642, 52.0858, 5.29733, -60.6642, 52.5858, 5.29733, -60.1642, 52.5858, 5.29733, -60.9142, 3.33579, 5.29733, -61.4142, -0.664214, 5.29733, -60.9142, -0.164214, 5.29733, -60.6642, 52.0858, 5.29733, -60.6642, 52.5858, 5.29733, -60.9142, 44.8358, 0.297325, -32.4142, 44.8358, 0.297325, -29.4142, 47.0858, 0.297325, -29.4142, 47.0858, 0.297325, -32.4142, 40.0858, 0.297325, -33.1642, 47.5858, 0.297325, -32.9142, 51.0858, 0.297325, -32.9142, 51.0858, 0.297325, -59.1642, 28.8358, 0.297325, -59.1642, 28.8358, 0.297325, -48.4142, 44.3358, 0.297325, -32.9142, 44.8358, 0.297325, -32.4142, 47.0858, 0.297325, -32.4142, 47.5858, 0.297325, -32.9142, 40.0858, 0.297325, -33.1642, 44.3358, 0.297325, -32.9142, 47.5858, 0.297325, -32.9142, -0.164214, 5.29733, -47.4142, -0.664214, 5.29733, -47.9142, -0.664214, 5.29733, -47.1642, 42.8358, 5.29733, -30.9142, 42.8358, 5.29733, -31.4142, 39.8358, 5.29733, -31.4142, 39.0858, 5.29733, -30.9142, 27.3358, 5.29733, -46.9142, 27.8358, 5.29733, -47.4142, -0.164214, 5.29733, -47.4142, -0.664214, 5.29733, -47.1642, 39.0858, 5.29733, -30.9142, 39.8358, 5.29733, -31.4142, 38.5858, 5.29733, -32.6642, 27.3358, 5.29733, -46.9142, 39.0858, 5.29733, -30.9142, 38.5858, 5.29733, -32.6642, 27.8358, 5.29733, -47.4142, 26.5858, 0.297325, -32.9142, 26.5858, 0.297325, -31.1642, 28.3358, 0.297325, -31.1642, 28.3358, 0.297325, -32.9142, 39.5858, 0.297325, -27.1642, 29.0858, 0.297325, -41.1642, 28.8358, 0.297325, -30.6642, 28.8358, 0.297325, -0.914215, 40.5858, 0.297325, -0.914215, 28.8358, 0.297325, -33.4142, 28.3358, 0.297325, -32.9142, 28.3358, 0.297325, -31.1642, 28.8358, 0.297325, -30.6642, 29.0858, 0.297325, -41.1642, 28.8358, 0.297325, -33.4142, 28.8358, 0.297325, -30.6642, 47.0858, 0.297325, -27.6642, 47.0858, 0.297325, -29.4142, 44.8358, 0.297325, -29.4142, 44.8358, 0.297325, -27.6642, 40.5858, 0.297325, -0.914215, 44.3358, 0.297325, -27.1642, 39.5858, 0.297325, -27.1642, 47.5858, 0.297325, -27.1642, 47.0858, 0.297325, -27.6642, 44.8358, 0.297325, -27.6642, 44.3358, 0.297325, -27.1642, 40.5858, 0.297325, -0.914215, 40.5858, 0.297325, -0.914215, 51.0858, 0.297325, 9.83578, 51.0858, 0.297325, -27.1642, 47.5858, 0.297325, -27.1642, -0.664214, 4.29733, -36.9142, -0.664214, 4.29733, -36.1642, -0.164214, 4.29733, -36.6642, 25.3358, 4.29733, -34.4142, 25.3358, 4.29733, -35.1642, 13.8358, 4.29733, -34.9142, 13.3358, 4.29733, -34.4142, -0.664214, 4.29733, -36.9142, -0.164214, 4.29733, -36.6642, 12.0858, 4.29733, -36.6642, 12.5858, 4.29733, -37.1642, 12.0858, 4.29733, -36.6642, 13.3358, 4.29733, -34.4142, 13.8358, 4.29733, -34.9142, 12.5858, 4.29733, -37.1642, 12.5858, 0.297325, -32.9142, 11.3358, 0.297325, -35.1642, 0.835786, 0.297325, -35.1642, 14.0858, 0.297325, -29.4142, 14.5858, 0.297325, -31.1642, 26.5858, 0.297325, -31.1642, 26.5858, 0.297325, -32.9142, 12.5858, 0.297325, -32.9142, 23.0858, 0.297325, -0.914215, 23.0858, 0.297325, -27.1642, 15.5858, 0.297325, -27.1642, 14.0858, 0.297325, -30.6642, 14.5858, 0.297325, -31.1642, 12.5858, 0.297325, -32.9142, 14.0858, 0.297325, -29.4142, 14.0858, 0.297325, -30.6642, 12.5858, 0.297325, -32.9142, 15.5858, 0.297325, -27.1642, 14.0858, 0.297325, -29.4142, 0.835786, 0.297325, -35.1642, 0.835786, 0.297325, -0.914215, 23.0858, 0.297325, -0.914215, 52.5858, 5.29733, -31.1642, 52.5858, 5.29733, -31.9142, 52.0858, 5.29733, -31.4142, 49.0858, 5.29733, -30.9142, 52.5858, 5.29733, -31.1642, 52.0858, 5.29733, -31.4142, 49.0858, 5.29733, -31.4142, -0.164214, 4.29733, 0.585785, -0.664214, 4.29733, 0.0857849, -0.664214, 4.29733, 0.835785, 24.8358, 4.29733, -28.4142, 25.3358, 4.29733, -28.6642, 25.3358, 4.29733, -29.6642, 24.0858, 4.29733, -28.6642, 15.8358, 4.29733, -29.6642, 16.3358, 4.29733, -28.6642, 24.0858, 4.29733, -28.6642, 25.3358, 4.29733, -29.6642, 24.5858, 4.29733, 0.0857849, 24.0858, 4.29733, 0.585785, 24.8358, 4.29733, 0.835785, 24.8358, 4.29733, -28.4142, 24.5858, 4.29733, -28.1642, 24.5858, 4.29733, 0.0857849, 24.8358, 4.29733, 0.835785, 24.8358, 4.29733, -28.4142, 24.0858, 4.29733, -28.6642, 24.5858, 4.29733, -28.1642, 24.0858, 4.29733, 0.585785, -0.164214, 4.29733, 0.585785, -0.664214, 4.29733, 0.835785, 24.8358, 4.29733, 0.835785, 39.8358, 3.29733, -29.4142, 40.0858, 3.29733, -28.6642, 41.5858, 3.29733, -28.6642, 27.8358, 3.29733, 0.585785, 27.3358, 3.29733, 0.0857849, 27.3358, 3.29733, 0.835785, 39.0858, 3.29733, 1.08578, 45.0858, 3.29733, 6.08578, 40.0858, 3.29733, 0.585785, 39.0858, 3.29733, 1.08578, 40.0858, 3.29733, 0.585785, 27.8358, 3.29733, 0.585785, 27.3358, 3.29733, 0.835785)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 12), PackedInt32Array(15, 14, 13), PackedInt32Array(18, 17, 16), PackedInt32Array(21, 20, 19), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(28, 27, 26), PackedInt32Array(31, 30, 29), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(39, 38, 36), PackedInt32Array(36, 38, 37), PackedInt32Array(43, 42, 40), PackedInt32Array(40, 42, 41), PackedInt32Array(45, 44, 46), PackedInt32Array(46, 44, 47), PackedInt32Array(47, 44, 48), PackedInt32Array(51, 50, 49), PackedInt32Array(54, 53, 52), PackedInt32Array(57, 56, 55), PackedInt32Array(60, 59, 58), PackedInt32Array(62, 61, 63), PackedInt32Array(63, 61, 64), PackedInt32Array(64, 61, 65), PackedInt32Array(69, 68, 66), PackedInt32Array(66, 68, 67), PackedInt32Array(71, 70, 72), PackedInt32Array(72, 70, 75), PackedInt32Array(72, 75, 74), PackedInt32Array(72, 74, 73), PackedInt32Array(77, 76, 78), PackedInt32Array(78, 76, 79), PackedInt32Array(82, 81, 80), PackedInt32Array(85, 84, 83), PackedInt32Array(87, 86, 88), PackedInt32Array(88, 86, 89), PackedInt32Array(93, 92, 90), PackedInt32Array(90, 92, 91), PackedInt32Array(96, 95, 94), PackedInt32Array(100, 99, 97), PackedInt32Array(97, 99, 98), PackedInt32Array(104, 103, 101), PackedInt32Array(101, 103, 102), PackedInt32Array(106, 105, 107), PackedInt32Array(107, 105, 108), PackedInt32Array(108, 105, 109), PackedInt32Array(111, 110, 112), PackedInt32Array(112, 110, 113), PackedInt32Array(116, 115, 114), PackedInt32Array(120, 119, 117), PackedInt32Array(117, 119, 118), PackedInt32Array(123, 122, 121), PackedInt32Array(125, 124, 126), PackedInt32Array(126, 124, 127), PackedInt32Array(127, 124, 128), PackedInt32Array(132, 131, 129), PackedInt32Array(129, 131, 130), PackedInt32Array(135, 134, 133), PackedInt32Array(137, 136, 138), PackedInt32Array(138, 136, 139), PackedInt32Array(141, 140, 142), PackedInt32Array(142, 140, 143), PackedInt32Array(147, 146, 144), PackedInt32Array(144, 146, 145), PackedInt32Array(148, 151, 149), PackedInt32Array(149, 151, 150), PackedInt32Array(153, 152, 154), PackedInt32Array(154, 152, 155), PackedInt32Array(158, 157, 156), PackedInt32Array(161, 160, 159), PackedInt32Array(164, 163, 162), PackedInt32Array(166, 165, 167), PackedInt32Array(167, 165, 168), PackedInt32Array(168, 165, 169), PackedInt32Array(172, 171, 170), PackedInt32Array(176, 175, 173), PackedInt32Array(173, 175, 174), PackedInt32Array(179, 178, 177), PackedInt32Array(180, 183, 181), PackedInt32Array(181, 183, 182), PackedInt32Array(185, 184, 186), PackedInt32Array(186, 184, 187), PackedInt32Array(190, 189, 188), PackedInt32Array(192, 191, 193), PackedInt32Array(193, 191, 194), PackedInt32Array(197, 196, 195), PackedInt32Array(199, 198, 200), PackedInt32Array(200, 198, 201), PackedInt32Array(203, 202, 204), PackedInt32Array(207, 206, 205), PackedInt32Array(210, 209, 208), PackedInt32Array(214, 213, 211), PackedInt32Array(211, 213, 212)]
+agent_radius = 0.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tya0h"]
+size = Vector3(29, 0.3, 44)
+
+[sub_resource type="Environment" id="Environment_86k17"]
+background_mode = 1
+
+[sub_resource type="Animation" id="Animation_0uoml"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xuum5"]
+resource_name = "death"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.341511, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5eute"]
+_data = {
+"RESET": SubResource("Animation_0uoml"),
+"death": SubResource("Animation_xuum5")
+}
+
+[sub_resource type="Animation" id="Animation_6wvtr"]
+resource_name = "AK47"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shotgun:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AK47:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Revolver:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AK47/Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shotgun/TextureRect:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-172, -324)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AK47/TextureRect:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-172, -324)]
+}
+
+[sub_resource type="Animation" id="Animation_fp6kr"]
+resource_name = "AK47Fire"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AK47/TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-172, -279), Vector2(-172, -324)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AK47/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AK47/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shooting_done"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shotgun:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AK47:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Revolver:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_w46i7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AK47:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Revolver:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shotgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AK47/Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Revolver/Sprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AK47/TextureRect:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-172, -279)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shotgun/TextureRect:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-172, -324)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AK47/Sprite2D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Revolver/TextureRect:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-172, -324)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Revolver/Sprite2D:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_1sffn"]
+resource_name = "Revolver"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shotgun:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AK47:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Revolver:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Revolver/Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shotgun/TextureRect:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-172, -324)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Revolver/TextureRect:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-172, -324)]
+}
+
+[sub_resource type="Animation" id="Animation_y01pj"]
+resource_name = "RevolverFire"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Revolver/TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.517633, 1),
+"update": 0,
+"values": [Vector2(-172, -302.89), Vector2(-172, -324)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Revolver/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Revolver/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 7, 13]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shooting_done"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Revolver:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AK47:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shotgun:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7h0bc"]
+resource_name = "Shotgun"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shotgun/TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-172, -324)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shotgun/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shotgun/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AK47:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Revolver:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Shotgun:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_b2m1x"]
+resource_name = "ShotgunFire"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shotgun/TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.7),
+"transitions": PackedFloat32Array(0.590643, 1, 1, 0.933033),
+"update": 0,
+"values": [Vector2(-172, -290), Vector2(-172, -325), 0, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shotgun/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 4, 8, 12, 15]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shotgun/Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shooting_done"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shotgun:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AK47:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Revolver:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pgb64"]
+_data = {
+"AK47": SubResource("Animation_6wvtr"),
+"AK47Fire": SubResource("Animation_fp6kr"),
+"RESET": SubResource("Animation_w46i7"),
+"Revolver": SubResource("Animation_1sffn"),
+"RevolverFire": SubResource("Animation_y01pj"),
+"Shotgun": SubResource("Animation_7h0bc"),
+"ShotgunFire": SubResource("Animation_b2m1x")
+}
+
+[sub_resource type="Animation" id="Animation_ssr3g"]
+resource_name = "Fade In Black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tqglk"]
+resource_name = "FadeOutWhite"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.366021, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["lose"],
+"method": &"to_scene"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7iwml"]
+resource_name = "ProtagDied"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["win"],
+"method": &"to_scene"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vsem0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u03qr"]
+_data = {
+"Fade In Black": SubResource("Animation_ssr3g"),
+"FadeOutWhite": SubResource("Animation_tqglk"),
+"ProtagDied": SubResource("Animation_7iwml"),
+"RESET": SubResource("Animation_vsem0")
+}
+
+[node name="GameScene" type="Node3D" node_paths=PackedStringArray("current_computer", "go_here", "minimap", "protag")]
+script = ExtResource("1_mm433")
+starting_energy = 50
+troopPrice = [35, 55, 70, 90, 0, 0, 0]
+current_computer = NodePath("Computer1")
+go_here = NodePath("EntireMap/GoHere")
+minimap = NodePath("UI/TopHalf/Right/MiniMap/SubViewport2/MiniMap")
+protag = NodePath("Protag")
+code_speed = 3.0
+
+[node name="EntireMap" parent="." instance=ExtResource("2_if7tl")]
+
+[node name="Minimap" parent="EntireMap" node_paths=PackedStringArray("main_scene") instance=ExtResource("3_ho3do")]
+main_scene = NodePath("../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="EntireMap"]
+environment = SubResource("Environment_6jjym")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="EntireMap"]
+transform = Transform3D(0.707107, 0.353553, -0.612373, 0, 0.866026, 0.5, 0.707107, -0.353553, 0.612373, 0, 17, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="EntireMap"]
+navigation_mesh = SubResource("NavigationMesh_ec2is")
+
+[node name="MapCollisons2" type="MeshInstance3D" parent="EntireMap/NavigationRegion3D"]
+visible = false
+mesh = ExtResource("4_vv2bj")
+skeleton = NodePath("")
+
+[node name="GoHere" type="Node3D" parent="EntireMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.4, -68)
+
+[node name="Computer1" parent="." node_paths=PackedStringArray("next_computer") instance=ExtResource("2_i7nyc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17.2275, 0.889537, -26.7061)
+active = true
+next_computer = NodePath("../Computer2")
+
+[node name="Computer2" parent="." node_paths=PackedStringArray("next_computer") instance=ExtResource("2_i7nyc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 41.9, 0.6, -26.4)
+next_computer = NodePath("../Computer3")
+
+[node name="Computer3" parent="." instance=ExtResource("2_i7nyc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 41.9, 0.6, -58.7)
+
+[node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.149999, -11)
+visible = false
+script = ExtResource("3_sihyi")
+
+[node name="Box" type="CSGBox3D" parent="Spawner"]
+size = Vector3(1, 0.1, 1)
+
+[node name="EnergyTimer" type="Timer" parent="."]
+
+[node name="Protag" parent="." node_paths=PackedStringArray("guns") instance=ExtResource("4_vng4s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.61064, 1.2, -1.8632)
+player_controlled = false
+guns = [NodePath("PistolArea"), NodePath("ShotgunArea"), NodePath("ChaingunArea"), null]
+
+[node name="ValidTP" type="Area3D" parent="."]
+visible = false
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ValidTP"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0.5)
+shape = SubResource("BoxShape3D_tya0h")
+disabled = true
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.262745, 0.215686, 0.270588, 1)
+z_as_relative = false
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_je16c")
+stretch_mode = 1
+
+[node name="UI" type="VBoxContainer" parent="." node_paths=PackedStringArray("game_scene", "protag")]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_047ux")
+game_scene = NodePath("..")
+protag = NodePath("../Protag")
+
+[node name="TopHalf" type="HBoxContainer" parent="UI"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Left" type="VBoxContainer" parent="UI/TopHalf"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="UI/TopHalf/Left"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Label" type="Label" parent="UI/TopHalf/Left/Control"]
+layout_mode = 2
+offset_left = 144.0
+offset_top = 16.0
+offset_right = 279.0
+offset_bottom = 30.0
+scale = Vector2(2, 2)
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.2
+theme = ExtResource("10_t486a")
+text = "Energy: 100"
+horizontal_alignment = 1
+
+[node name="Shop" type="GridContainer" parent="UI/TopHalf/Left" node_paths=PackedStringArray("ui_sounds")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+script = ExtResource("9_4723a")
+ui_sounds = NodePath("../../../../UISounds")
+
+[node name="TrapperButton" type="Button" parent="UI/TopHalf/Left/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "The Flying Venus Trap knows one thing:
+chomp! Trappers are great at gathering 
+energy, but don't have much health.
+Use them to rush the enemy or distract them."
+theme = ExtResource("10_t486a")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/TopHalf/Left/Shop/TrapperButton"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_j5d5d")
+expand_mode = 2
+
+[node name="MockButton" type="Control" parent="UI/TopHalf/Left/Shop/TrapperButton"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="UI/TopHalf/Left/Shop/TrapperButton/MockButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 29.0
+offset_right = 76.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_blmmp")
+
+[node name="Label" type="Label" parent="UI/TopHalf/Left/Shop/TrapperButton/MockButton"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 16.0
+offset_right = 273.0
+offset_bottom = 115.0
+theme = ExtResource("10_t486a")
+text = "TRAPPER
+Health: 3/10
+Speed: 9/10
+Power: 2/10
+Leech: 8/10
+COST 35 ENERGY"
+horizontal_alignment = 1
+
+[node name="ShrubbonButton" type="Button" parent="UI/TopHalf/Left/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Kernels are good at chucking ears of corn.
+They may not have anything too special,
+but they are always reliable and get the
+job done."
+theme = ExtResource("10_t486a")
+
+[node name="MockButton" type="Control" parent="UI/TopHalf/Left/Shop/ShrubbonButton"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="UI/TopHalf/Left/Shop/ShrubbonButton/MockButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 18.0
+offset_right = 69.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_dvuu2")
+
+[node name="Label" type="Label" parent="UI/TopHalf/Left/Shop/ShrubbonButton/MockButton"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 16.0
+offset_right = 273.0
+offset_bottom = 115.0
+theme = ExtResource("10_t486a")
+text = "KERNEL
+Health: 5/10
+Speed: 4/10
+Power: 5/10
+Leech: 5/10
+COST 55 ENERGY"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/TopHalf/Left/Shop/ShrubbonButton"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_4tcdb")
+expand_mode = 2
+
+[node name="PotbellyButton" type="Button" parent="UI/TopHalf/Left/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Potbellies aren't very mobile, but pack
+a lot of health and can shoot seeds at
+alarming rates."
+theme = ExtResource("10_t486a")
+
+[node name="MockButton" type="Control" parent="UI/TopHalf/Left/Shop/PotbellyButton"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="UI/TopHalf/Left/Shop/PotbellyButton/MockButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 65.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_p7x1y")
+
+[node name="Label" type="Label" parent="UI/TopHalf/Left/Shop/PotbellyButton/MockButton"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 16.0
+offset_right = 273.0
+offset_bottom = 115.0
+theme = ExtResource("10_t486a")
+text = "POTBELLY
+Health: 10/10
+Speed: 1/10
+Power: 8/10
+Leech: 0/10
+COST 70 ENERGY"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/TopHalf/Left/Shop/PotbellyButton"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_52nn2")
+expand_mode = 2
+
+[node name="MageshroomButton" type="Button" parent="UI/TopHalf/Left/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Using their magic, Funglers are able to
+hit Kaboom from afar. Match this with
+their ability to teleport and you've got
+an annoying enemy to deal with."
+theme = ExtResource("10_t486a")
+
+[node name="MockButton" type="Control" parent="UI/TopHalf/Left/Shop/MageshroomButton"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="UI/TopHalf/Left/Shop/MageshroomButton/MockButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 70.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_tasrw")
+
+[node name="Label" type="Label" parent="UI/TopHalf/Left/Shop/MageshroomButton/MockButton"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 17.0
+offset_right = 278.0
+offset_bottom = 116.0
+theme = ExtResource("10_t486a")
+text = "FUNGLER
+Health: 7/10
+Speed: 7/10
+Power: 5/10
+Leech: 8/10
+COST 90 ENERGY"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/TopHalf/Left/Shop/MageshroomButton"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_rb3pb")
+expand_mode = 2
+
+[node name="Right" type="VBoxContainer" parent="UI/TopHalf"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/TopHalf/Right"]
+layout_mode = 2
+theme = ExtResource("10_t486a")
+text = "CHOOSE TROOPER TO SPAWN:"
+horizontal_alignment = 1
+
+[node name="Palette" type="HBoxContainer" parent="UI/TopHalf/Right"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+script = ExtResource("10_x2l5c")
+disable_color = Color(1, 0, 0.341176, 0.537255)
+
+[node name="SelectTrapper" type="Button" parent="UI/TopHalf/Right/Palette"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("10_t486a")
+toggle_mode = true
+action_mode = 0
+
+[node name="Icon" type="Sprite2D" parent="UI/TopHalf/Right/Palette/SelectTrapper"]
+texture_filter = 1
+position = Vector2(33, 27)
+texture = ExtResource("11_blmmp")
+
+[node name="Label" type="Label" parent="UI/TopHalf/Right/Palette/SelectTrapper"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 12.0
+offset_right = 94.0
+offset_bottom = 26.0
+scale = Vector2(2, 2)
+theme = ExtResource("10_t486a")
+text = "x10"
+
+[node name="SelectShrubbon" type="Button" parent="UI/TopHalf/Right/Palette"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("10_t486a")
+toggle_mode = true
+
+[node name="Icon" type="Sprite2D" parent="UI/TopHalf/Right/Palette/SelectShrubbon"]
+texture_filter = 1
+position = Vector2(33, 26)
+scale = Vector2(0.78125, 0.765625)
+texture = ExtResource("13_dvuu2")
+
+[node name="Label" type="Label" parent="UI/TopHalf/Right/Palette/SelectShrubbon"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 12.0
+offset_right = 94.0
+offset_bottom = 26.0
+scale = Vector2(2, 2)
+theme = ExtResource("10_t486a")
+text = "x10"
+
+[node name="SelectPotbelly" type="Button" parent="UI/TopHalf/Right/Palette"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("10_t486a")
+toggle_mode = true
+
+[node name="Icon" type="Sprite2D" parent="UI/TopHalf/Right/Palette/SelectPotbelly"]
+texture_filter = 1
+position = Vector2(33, 26)
+scale = Vector2(0.78125, 0.765625)
+texture = ExtResource("13_p7x1y")
+
+[node name="Label" type="Label" parent="UI/TopHalf/Right/Palette/SelectPotbelly"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 12.0
+offset_right = 94.0
+offset_bottom = 26.0
+scale = Vector2(2, 2)
+theme = ExtResource("10_t486a")
+text = "x10"
+
+[node name="SelectMageshroom" type="Button" parent="UI/TopHalf/Right/Palette"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("10_t486a")
+toggle_mode = true
+
+[node name="Icon" type="Sprite2D" parent="UI/TopHalf/Right/Palette/SelectMageshroom"]
+texture_filter = 1
+position = Vector2(33, 26)
+scale = Vector2(0.78125, 0.765625)
+texture = ExtResource("15_tasrw")
+
+[node name="Label" type="Label" parent="UI/TopHalf/Right/Palette/SelectMageshroom"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 12.0
+offset_right = 94.0
+offset_bottom = 26.0
+scale = Vector2(2, 2)
+theme = ExtResource("10_t486a")
+text = "x10"
+
+[node name="MiniMap" type="SubViewportContainer" parent="UI/TopHalf/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport2" type="SubViewport" parent="UI/TopHalf/Right/MiniMap"]
+handle_input_locally = false
+size = Vector2i(574, 251)
+render_target_update_mode = 4
+
+[node name="MiniMap" type="Camera3D" parent="UI/TopHalf/Right/MiniMap/SubViewport2" node_paths=PackedStringArray("main_scene")]
+transform = Transform3D(1, 2.13163e-14, 9.31765e-22, 0, -4.37114e-08, 1, 2.13163e-14, -1, -4.37114e-08, 27, 47, -78)
+cull_mask = 524288
+environment = SubResource("Environment_86k17")
+projection = 1
+current = true
+size = 39.0
+script = ExtResource("10_2h3ma")
+main_scene = NodePath("../../../../../..")
+positions = Array[Vector3]([Vector3(12, 47, -17), Vector3(39, 47, -15), Vector3(27, 47, -48), Vector3(27, 47, -78)])
+rotations = Array[Vector3]([Vector3(-90, -90, 0), Vector3(-90, -90, 0), Vector3(-90, 0, 0), Vector3(-90, 0, 0)])
+
+[node name="Label" type="Label" parent="UI/TopHalf/Right/MiniMap/SubViewport2"]
+offset_left = 6.915
+offset_top = 4.95
+offset_right = 234.915
+offset_bottom = 27.95
+theme = ExtResource("10_t486a")
+text = "PLACE TROOPERS HERE"
+
+[node name="BottomHalf" type="VBoxContainer" parent="UI"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProtagView" type="SubViewportContainer" parent="UI/BottomHalf"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/BottomHalf/ProtagView"]
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(1152, 322)
+render_target_update_mode = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/BottomHalf/ProtagView/SubViewport"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -234.0
+offset_top = 12.09
+offset_right = 234.0
+offset_bottom = 39.09
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("10_t486a")
+show_percentage = false
+
+[node name="ProtagCamera" type="Camera3D" parent="UI/BottomHalf/ProtagView/SubViewport"]
+cull_mask = 524287
+current = true
+fov = 37.6
+script = ExtResource("8_h42fx")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="UI/BottomHalf/ProtagView/SubViewport/ProtagCamera"]
+current = true
+
+[node name="State" type="Label" parent="UI/BottomHalf/ProtagView/SubViewport"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.695
+offset_top = -60.545
+offset_right = 25.305
+offset_bottom = -37.545
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("10_t486a")
+text = "0"
+
+[node name="Mag" type="Label" parent="UI/BottomHalf/ProtagView/SubViewport"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 56.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme = ExtResource("10_t486a")
+theme_override_font_sizes/font_size = 35
+text = "\"Mag:\" "
+
+[node name="Shell" type="Label" parent="UI/BottomHalf/ProtagView/SubViewport"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("10_t486a")
+theme_override_font_sizes/font_size = 35
+text = "\"Shell:\" "
+horizontal_alignment = 2
+
+[node name="Health" type="Label" parent="UI/BottomHalf/ProtagView/SubViewport"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -156.0
+offset_bottom = 85.5
+grow_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("10_t486a")
+theme_override_font_sizes/font_size = 35
+text = "HEALTH"
+
+[node name="ColorRect" type="ColorRect" parent="UI/BottomHalf/ProtagView/SubViewport"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+color = Color(0.54902, 0, 0, 1)
+
+[node name="Label" type="Label" parent="UI/BottomHalf/ProtagView/SubViewport/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -57.5
+offset_right = 164.0
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("20_re3eg")
+theme_override_font_sizes/font_size = 100
+text = "YOU DIED"
+
+[node name="DeathAnim" type="AnimationPlayer" parent="UI/BottomHalf/ProtagView/SubViewport/ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_5eute")
+}
+
+[node name="Head" type="Control" parent="UI/BottomHalf/ProtagView/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/BottomHalf/ProtagView/SubViewport/Head"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.495
+offset_top = 4.625
+offset_right = 139.505
+offset_bottom = 156.625
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("20_sggvt")
+
+[node name="HeadSprite" type="Sprite2D" parent="UI/BottomHalf/ProtagView/SubViewport/Head/TextureRect"]
+texture_filter = 1
+position = Vector2(95, 95)
+scale = Vector2(3, 3)
+texture = ExtResource("22_yqlbd")
+hframes = 5
+
+[node name="GunUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("protag")]
+script = ExtResource("21_d6a0r")
+protag = NodePath("../Protag")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GunUI"]
+libraries = {
+"": SubResource("AnimationLibrary_pgb64")
+}
+
+[node name="Shotgun" type="Control" parent="GunUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="GunUI/Shotgun"]
+texture_filter = 1
+position = Vector2(20, -69)
+scale = Vector2(3.805, 3.805)
+texture = ExtResource("21_pfkwb")
+hframes = 4
+vframes = 4
+
+[node name="TextureRect" type="TextureRect" parent="GunUI/Shotgun"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.0
+offset_top = -324.0
+offset_right = -44.0
+offset_bottom = -196.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3, 3)
+size_flags_vertical = 8
+texture = ExtResource("21_qxdvm")
+
+[node name="AK47" type="Control" parent="GunUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="GunUI/AK47"]
+visible = false
+texture_filter = 1
+position = Vector2(20, -57.865)
+scale = Vector2(3.805, 3.805)
+texture = ExtResource("21_pfkwb")
+hframes = 4
+vframes = 4
+frame = 3
+
+[node name="TextureRect" type="TextureRect" parent="GunUI/AK47"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.0
+offset_top = -279.0
+offset_right = -44.0
+offset_bottom = -151.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3, 3)
+size_flags_vertical = 8
+texture = ExtResource("24_k8oei")
+
+[node name="Revolver" type="Control" parent="GunUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="GunUI/Revolver"]
+visible = false
+texture_filter = 1
+position = Vector2(20, -53.07)
+scale = Vector2(3.805, 3.805)
+texture = ExtResource("21_pfkwb")
+hframes = 4
+vframes = 4
+frame = 1
+
+[node name="TextureRect" type="TextureRect" parent="GunUI/Revolver"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.0
+offset_top = -324.0
+offset_right = -44.0
+offset_bottom = -196.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3, 3)
+size_flags_vertical = 8
+texture = ExtResource("25_0p0qi")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
+offset_right = 163.0
+offset_bottom = 139.0
+texture = ExtResource("20_sggvt")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MusicPlayer" type="Node" parent="." node_paths=PackedStringArray("starting_music")]
+script = ExtResource("21_1i55v")
+starting_music = NodePath("MainMusic")
+
+[node name="MainMusic" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("7_npxu0")
+volume_db = -52.788
+
+[node name="BossMusic" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("23_evdyk")
+
+[node name="Dialogue" type="Node" parent="."]
+script = ExtResource("35_4qdhu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 101
+
+[node name="ScreenFade" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("24_42unm")
+opening_animation = "Fade In Black"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ScreenFade"]
+libraries = {
+"": SubResource("AnimationLibrary_u03qr")
+}
+
+[node name="UISounds" type="Node" parent="."]
+script = ExtResource("36_yavun")
+
+[node name="Buy" type="AudioStreamPlayer" parent="UISounds"]
+stream = ExtResource("37_tsl5w")
+
+[node name="Choose" type="AudioStreamPlayer" parent="UISounds"]
+stream = ExtResource("38_opme0")
+
+[node name="Bit" type="AudioStreamPlayer" parent="UISounds"]
+stream = ExtResource("39_g1qrb")
+
+[node name="Bloop" type="AudioStreamPlayer" parent="UISounds"]
+stream = ExtResource("40_wnys7")
+
+[connection signal="final_room" from="." to="UI" method="_on_game_scene_final_room"]
+[connection signal="final_room" from="." to="MusicPlayer" method="_on_game_scene_final_room"]
+[connection signal="progressed" from="." to="Dialogue" method="_on_game_scene_progressed"]
+[connection signal="computer_action" from="Computer1" to="EntireMap" method="_on_computer_1_computer_action"]
+[connection signal="computer_action" from="Computer2" to="EntireMap" method="_on_computer_2_computer_action"]
+[connection signal="computer_action" from="Computer3" to="EntireMap" method="_on_computer_3_computer_action"]
+[connection signal="timeout" from="EnergyTimer" to="." method="_on_energy_timer_timeout"]
+[connection signal="boss_defeat" from="Protag" to="." method="_on_protag_boss_defeat"]
+[connection signal="bullet_shot" from="Protag" to="GunUI" method="_on_protag_bullet_shot"]
+[connection signal="protag_death" from="Protag" to="UI" method="_on_protag_protag_death"]
+[connection signal="protag_death" from="Protag" to="GunUI" method="_on_protag_protag_death"]
+[connection signal="protag_death" from="Protag" to="CanvasLayer/ScreenFade" method="_on_protag_protag_death"]
+[connection signal="area_entered" from="ValidTP" to="." method="_on_valid_tp_request"]
+[connection signal="button_down" from="UI/TopHalf/Left/Shop/TrapperButton" to="UI" method="_trapper_buy"]
+[connection signal="button_down" from="UI/TopHalf/Left/Shop/ShrubbonButton" to="UI" method="_shrubon_buy"]
+[connection signal="button_down" from="UI/TopHalf/Left/Shop/PotbellyButton" to="UI" method="_potbelly_buy"]
+[connection signal="button_down" from="UI/TopHalf/Left/Shop/MageshroomButton" to="UI" method="_mageshroom_buy"]
+[connection signal="pressed" from="UI/TopHalf/Right/Palette/SelectTrapper" to="UI/TopHalf/Right/Palette" method="_on_select_trapper_pressed"]
+[connection signal="pressed" from="UI/TopHalf/Right/Palette/SelectShrubbon" to="UI/TopHalf/Right/Palette" method="_on_select_shrubbon_pressed"]
+[connection signal="pressed" from="UI/TopHalf/Right/Palette/SelectPotbelly" to="UI/TopHalf/Right/Palette" method="_on_select_potbelly_pressed"]
+[connection signal="pressed" from="UI/TopHalf/Right/Palette/SelectMageshroom" to="UI/TopHalf/Right/Palette" method="_on_select_mageshroom_pressed"]

@@ -1,0 +1,8 @@
+~ intro
+
+N: March 7th, 2112\: [wait=0.5]
+	A UFO has landed behind the White House housing aliens who hold a strange liquid and shout "COME GET SOME!"[next=2]
+N: People nearby cower in fear, but not Colonel Kaboom! He grabs his guns and and eliminates the aliens.[next=2]
+N: With their ship left open, he hops on the UFO on course to Venus to destroy the aliens at their roots.[next=2]
+N: "It's Kaboom Time!"[next=2]
+=> END

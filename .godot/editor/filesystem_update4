@@ -1,0 +1,11 @@
+res://Scenes/UI/Intro.tscn
+res://Scripts/State/ProtagStates/Shooting.gd
+res://Scripts/State/TroopStates/Fireball.gd
+res://Graphics/UI/Themes/Buttons.tres
+res://Scenes/Troopers/Types/Archville.tscn
+res://Scenes/MainScene.tscn
+res://Scenes/Protag.tscn
+res://Scenes/UI/main_menu.tscn
+res://Scenes/UI/WinScreen.tscn
+res://Dialogue/Player/balloon.tscn
+res://Scenes/UI/LoseScreen.tscn
